@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMP Workshop @ AI/CRV 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── TOKENS ── */
+    :root {
+      --indigo:   #2c4d8e;
+      --indigo-d: #1e3566;
+      --indigo-lt:#eef2fa;
+      --text:     #1a1a1a;
+      --muted:    #555;
+      --border:   #d0d5dd;
+      --bg:       #fafafa;
+      --white:    #ffffff;
+      --serif:    'Source Serif 4', Georgia, serif;
+      --sans:     'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: var(--indigo); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--indigo-d);
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 2rem;
+      height: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: .95rem; font-weight: 600;
+      color: rgba(255,255,255,.9);
+    }
+    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links a {
+      color: rgba(255,255,255,.65);
+      font-size: .83rem; font-weight: 500;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: #fff; text-decoration: none; }
+
+    /* ── HERO ── */
+    #home {
+      background: var(--indigo);
+      padding: 4.5rem 2rem 3.5rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 720px; margin: 0 auto; }
+    .hero-venue {
+      font-family: var(--sans);
+      font-size: .78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 1.1rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: .5rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 2rem;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem;
+      margin-bottom: 2.2rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .55rem 1.3rem;
+      border-radius: 5px;
+      font-family: var(--sans);
+      font-size: .85rem; font-weight: 600;
+      transition: opacity .15s, box-shadow .15s;
+      cursor: pointer;
+    }
+    .btn:hover { opacity: .88; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+    .btn-primary { background: #fff; color: var(--indigo); }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,.45); color: #fff; background: transparent; }
+
+    /* key dates row */
+    .hero-dates {
+      display: flex; flex-wrap: nowrap; justify-content: center;
+      font-size: .88rem;
+      color: rgba(255,255,255,.6);
+    }
+    .hd-item { white-space: nowrap; padding: 0 1rem; }
+    .hd-item + .hd-item { border-left: 1px solid rgba(255,255,255,.25); }
+    .hd-label { display: inline; }
+    .hd-value { display: inline; font-weight: 600; color: rgba(255,255,255,.95); margin-left: .3rem; }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 3.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; }
+    .section-header {
+      margin-bottom: 1.4rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+      font-weight: 700; color: var(--text);
+    }
+
+    /* ── ABOUT ── */
+    .prose p { color: #2a2a2a; margin-bottom: .95rem; }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* ── TOPICS ── */
+    .topics-intro { margin-bottom: 1.1rem; color: #2a2a2a; }
+    .topic-list {
+      columns: 2; column-gap: 2.5rem;
+      list-style: none;
+    }
+    .topic-list li {
+      break-inside: avoid;
+      padding: .35rem 0 .35rem 1.2rem;
+      position: relative;
+      font-size: .95rem;
+      color: var(--text);
+      border-bottom: 1px solid #ebebeb;
+    }
+    .topic-list li:last-child { border-bottom: none; }
+    .topic-list li::before {
+      content: '•';
+      position: absolute; left: 0;
+      color: var(--indigo); font-size: 1rem; line-height: 1.7;
+    }
+    @media (max-width: 580px) { .topic-list { columns: 1; } }
+
+    /* ── GUIDELINES ── */
+    .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
+    .track {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      background: var(--bg);
+    }
+    .track h4 { font-family: var(--serif); font-size: .97rem; font-weight: 600; margin-bottom: .3rem; }
+    .track p { font-size: .9rem; color: var(--muted); }
+    .track strong { color: var(--text); }
+    @media (max-width: 520px) { .tracks { grid-template-columns: 1fr; } }
+
+    .fmt-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+    .fmt-list li { font-size: .94rem; padding-left: 1.3rem; position: relative; color: var(--text); }
+    .fmt-list li::before { content: '—'; position: absolute; left: 0; color: var(--indigo); }
+
+    .review-box {
+      margin-top: 1.2rem;
+      padding: .9rem 1.2rem;
+      background: var(--indigo-lt);
+      border-left: 3px solid var(--indigo);
+      border-radius: 0 5px 5px 0;
+      font-size: .91rem; color: #1e2d50;
+    }
+
+    /* ── DATES TABLE ── */
+    .dates-table { width: 100%; border-collapse: collapse; margin-top: .5rem; }
+    .dates-table tr { border-bottom: 1px solid var(--border); }
+    .dates-table tr:last-child { border-bottom: none; }
+    .dates-table td { padding: .75rem .5rem; font-size: .95rem; vertical-align: top; }
+    .dates-table td:first-child { width: 200px; color: var(--muted); font-weight: 500; white-space: nowrap; }
+    .dates-table td:last-child { font-weight: 600; color: var(--text); }
+    .dates-table tr.highlight td { color: var(--indigo); }
+    .dates-table tr.highlight td:last-child { color: var(--indigo-d); }
+
+    /* ── SPEAKERS ── */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: .5rem;
+    }
+    .speaker-card { text-align: center; }
+    .speaker-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      margin: 0 auto .75rem;
+      background: var(--indigo-lt);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.5rem; font-weight: 700; color: var(--indigo);
+      overflow: hidden;
+    }
+    .speaker-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .speaker-name { font-family: var(--serif); font-size: .97rem; font-weight: 600; color: var(--text); }
+    .speaker-affil { font-size: .82rem; color: var(--muted); margin-top: .15rem; }
+    .tba-note { margin-top: 1rem; font-size: .88rem; color: var(--muted); font-style: italic; }
+
+    /* ── ORGANIZERS ── */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 2rem 1.5rem;
+      margin-top: .5rem;
+    }
+    .org-card {
+      text-align: center;
+    }
+    .org-photo-wrap {
+      width: 100px; height: 100px; border-radius: 50%;
+      margin: 0 auto .75rem;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      background: var(--indigo-lt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .org-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .org-initials { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--indigo); }
+    .org-name { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .org-affil { font-size: .82rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 1.8rem 2rem;
+      text-align: center;
+      font-size: .82rem; color: var(--muted);
+    }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: .5rem; }
+    .footer-links a { color: var(--muted); font-weight: 500; }
+    .footer-links a:hover { color: var(--indigo); }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-dates { flex-wrap: wrap; gap: .3rem 0; }
+      .hd-item { white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">DMP @ AI/CRV 2026</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#cfp">Call for Papers</a>
+      <a href="#dates">Dates</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#organizers">Organizers</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-venue">Workshop &nbsp;·&nbsp; AI/CRV 2026 &nbsp;·&nbsp; May 25, 2026</div>
+    <h1 class="hero-title">Data and Model Protection<br>in Generative AI</h1>
+    <p class="hero-subtitle">
+      A full-day workshop co-located with the Canadian Conference on AI, Robots &amp; Vision
+    </p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">
+        Submit a Paper
+      </a>
+      <a class="btn btn-outline" href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">
+        Official AI/CRV Page
+      </a>
+    </div>
+    <div class="hero-dates">
+      <div class="hd-item">
+        <span class="hd-label">Submission deadline:</span><span class="hd-value">April 30, 2026 (AoE)</span>
+      </div>
+      <div class="hd-item">
+        <span class="hd-label">Notification:</span><span class="hd-value">May 5, 2026 (AoE)</span>
+      </div>
+      <div class="hd-item">
+        <span class="hd-label">Workshop:</span><span class="hd-value">May 25, 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTENT ── -->
+<div class="page-wrap">
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <div class="section-header">
+      <h2>About the Workshop</h2>
+    </div>
+    <div class="prose">
+      <p>Generative Artificial Intelligence (GenAI) systems are increasingly deployed in high-impact domains, raising critical concerns about the protection of training data, deployed models, and generated outputs. These systems face a growing range of security and privacy risks, including data leakage, membership and attribute inference, model extraction, prompt injection, poisoning attacks, and misuse of generated content.</p>
+      <p>Addressing these challenges requires not only robust technical defenses, but also thoughtful alignment with emerging governance, regulatory, and policy frameworks.</p>
+      <p>The <strong>Data and Model Protection in Generative AI (DMP)</strong> workshop at AI/CRV 2026 brings together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
+    </div>
+  </div>
+
+  <!-- CALL FOR PAPERS -->
+  <div class="section" id="cfp">
+    <div class="section-header">
+      <h2>Call for Papers</h2>
+    </div>
+
+    <p class="topics-intro">We invite submissions to the Data and Model Protection in Generative AI workshop at AI/CRV 2026. This workshop aims to bring together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
+
+    <p class="topics-intro" style="margin-top:.8rem;">Topics include, but are not limited to, the following:</p>
+
+    <ul class="topic-list">
+      <li>Data poisoning, backdoor attacks, and defenses in machine learning</li>
+      <li>Privacy risks and training data leakage in generative models</li>
+      <li>Dataset provenance, attribution, and governance</li>
+      <li>Model extraction, model stealing, and intellectual property protection</li>
+      <li>Model watermarking, fingerprinting, and ownership verification</li>
+      <li>Security risks in generative AI (e.g., prompt injection, jailbreak attacks)</li>
+      <li>Robust and secure machine learning pipelines</li>
+      <li>Governance, auditing, and responsible deployment of AI systems</li>
+    </ul>
+
+    <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Submission Guidelines</h3>
+    <p style="font-size:.95rem; color:#2a2a2a; margin-bottom:.8rem;">Submissions may report new research results, empirical analyses, system implementations, benchmarks, negative results, or visionary perspectives (e.g., positions).</p>
+    <ul class="fmt-list">
+      <li><strong>Long track:</strong> up to 9 pages (excluding references)</li>
+      <li><strong>Short track:</strong> up to 4 pages (excluding references)</li>
+      <li><strong>Formatting:</strong> use the official <a href="https://www.caiac.ca/en/conferences/canadianai-2026/call-papers" target="_blank">Canadian AI 2026 style files</a> and submit a single PDF (which should be anonymized, like Canadian AI submissions).</li>
+      <li><strong>Appendix:</strong> include any supplementary material in the same PDF — no page limit for the appendix.</li>
+    </ul>
+
+    <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Review Process</h3>
+    <div class="review-box">
+      Submissions will be reviewed by the workshop program chairs. Accepted papers will be presented as talks or posters. The workshop is <strong>non-archival</strong>, and authors are free to submit extended versions of their work to archival venues.
+    </div>
+
+    <p style="margin-top:1.4rem;">
+      <a class="btn btn-primary" href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">
+        Submit on OpenReview &rarr;
+      </a>
+    </p>
+  </div>
+
+  <!-- IMPORTANT DATES -->
+  <div class="section" id="dates">
+    <div class="section-header">
+      <h2>Important Dates</h2>
+    </div>
+    <table class="dates-table">
+      <tbody>
+        <tr>
+          <td>April 30, 2026</td>
+          <td>Submission deadline &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+        </tr>
+        <tr>
+          <td>May 5, 2026</td>
+          <td>Notification of decisions &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+        </tr>
+        <tr class="highlight">
+          <td>May 25, 2026</td>
+          <td>Workshop day &nbsp;<span style="font-weight:400;font-size:.88em">— co-located with AI/CRV 2026</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INVITED SPEAKERS -->
+  <div class="section" id="speakers">
+    <div class="section-header">
+      <h2>Confirmed Speakers</h2>
+    </div>
+    <div class="speakers-grid">
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
+               onerror="this.parentNode.innerHTML='JN'">
+        </div>
+        <div class="speaker-name"><a href="https://jeknov.github.io/" target="_blank" style="color:inherit;">Jekaterina Novikova</a></div>
+        <div class="speaker-affil">Vanguard Group</div>
+      </div>
+    </div>
+    <p class="tba-note">Additional speakers to be announced.</p>
+  </div>
+
+  <!-- ORGANIZERS -->
+  <div class="section" id="organizers">
+    <div class="section-header">
+      <h2>Organizers</h2>
+    </div>
+    <div class="org-grid">
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://yiweilu3.github.io/img/Yiwei_headshot.png" alt="Yiwei Lu"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>YL</span>'">
+        </div>
+        <div>
+          <div class="org-name">Yiwei Lu</div>
+          <div class="org-affil">University of Ottawa</div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://yihan-wang.com/2025.jpeg" alt="Yihan Wang"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>YW</span>'">
+        </div>
+        <div>
+          <div class="org-name">Yihan Wang</div>
+          <div class="org-affil">University of Waterloo</div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://www.uottawa.ca/faculty-engineering/sites/g/files/bhrskd396/files/2025-09/Fraser2025.jpeg" alt="Kathleen Fraser"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>KF</span>'">
+        </div>
+        <div>
+          <div class="org-name">Kathleen Fraser</div>
+          <div class="org-affil">University of Ottawa</div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://www.uottawa.ca/research-innovation/sites/g/files/bhrskd326/files/2023-10/millar_jason_new.jpg" alt="Jason Millar"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>JM</span>'">
+        </div>
+        <div>
+          <div class="org-name">Jason Millar</div>
+          <div class="org-affil">University of Ottawa</div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://media.licdn.com/dms/image/v2/D5603AQGDAo8lnK33jw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727399990395?e=1774483200&v=beta&t=eUAlgYKBFHnS1OnNnyCCFuuWhjIHVCSax3KXnF7t7BM" alt="Yongyi Mao"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>YM</span>'">
+        </div>
+        <div>
+          <div class="org-name">Yongyi Mao</div>
+          <div class="org-affil">University of Ottawa</div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-photo-wrap">
+          <img src="https://cjshui.github.io/photos/image2.jpeg" alt="Changjian Shui"
+               onerror="this.parentNode.innerHTML='<span class=org-initials>CS</span>'">
+        </div>
+        <div>
+          <div class="org-name">Changjian Shui</div>
+          <div class="org-affil">University of Ottawa</div>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:1.4rem; font-size:.88rem; color:var(--muted);">
+      For enquiries, please contact the organizers via the
+      <a href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">official workshop page</a>.
+    </p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-links">
+    <a href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">Official AI/CRV Page</a>
+    <a href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">OpenReview Submission</a>
+    <a href="#home">Back to Top</a>
+  </div>
+  <p>DMP Workshop @ AI/CRV 2026 &nbsp;·&nbsp; Data and Model Protection in Generative AI</p>
+</footer>
+
+</body>
+</html>
