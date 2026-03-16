@@ -216,6 +216,51 @@
     .speaker-name { font-family: var(--serif); font-size: .97rem; font-weight: 600; color: var(--text); }
     .speaker-affil { font-size: .82rem; color: var(--muted); margin-top: .15rem; }
     .tba-note { margin-top: 1rem; font-size: .88rem; color: var(--muted); font-style: italic; }
+    .speaker-bio-btn {
+      display: inline-block; margin-top: .5rem;
+      font-size: .78rem; font-weight: 600; color: var(--indigo);
+      cursor: pointer; border: none; background: none; padding: 0;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+    .speaker-bio-btn:hover { color: var(--indigo-d); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.45); backdrop-filter: blur(2px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--white); border-radius: 10px;
+      max-width: 560px; width: 100%; max-height: 85vh; overflow-y: auto;
+      padding: 2rem; position: relative;
+      box-shadow: 0 8px 40px rgba(0,0,0,.18);
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.1rem;
+      font-size: 1.4rem; line-height: 1; background: none; border: none;
+      cursor: pointer; color: var(--muted);
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-header { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1.2rem; }
+    .modal-avatar {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      overflow: hidden; border: 2px solid var(--border);
+      background: var(--indigo-lt);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--indigo);
+    }
+    .modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
+    .modal-affil { font-size: .85rem; color: var(--muted); margin-top: .15rem; }
+    .modal-section-label {
+      font-family: var(--serif); font-size: .88rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .6px;
+      color: var(--indigo); margin: 1.1rem 0 .4rem;
+    }
+    .modal-text { font-size: .92rem; color: #2a2a2a; line-height: 1.65; }
+    .modal-tba { font-size: .9rem; color: var(--muted); font-style: italic; }
 
     /* ── ORGANIZERS ── */
     .org-grid {
@@ -391,6 +436,7 @@
       <h2>Confirmed Speakers</h2>
     </div>
     <div class="speakers-grid">
+
       <div class="speaker-card">
         <div class="speaker-avatar">
           <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
@@ -398,9 +444,91 @@
         </div>
         <div class="speaker-name"><a href="https://jeknov.github.io/" target="_blank" style="color:inherit;">Jekaterina Novikova</a></div>
         <div class="speaker-affil">Vanguard Group</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-jeknov')">Bio &amp; Talk</button>
       </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
+               onerror="this.parentNode.innerHTML='SR'">
+        </div>
+        <div class="speaker-name"><a href="https://sirisharambhatla.com/" target="_blank" style="color:inherit;">Sirisha Rambhatla</a></div>
+        <div class="speaker-affil">University of Waterloo</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-sirisha')">Bio &amp; Talk</button>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://www.ee.torontomu.ca/~samavi/images/Reza_05_s.jpg" alt="Reza Samavi"
+               onerror="this.parentNode.innerHTML='RS'">
+        </div>
+        <div class="speaker-name"><a href="https://www.ee.torontomu.ca/~samavi/about.html" target="_blank" style="color:inherit;">Reza Samavi</a></div>
+        <div class="speaker-affil">Toronto Metropolitan University</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-reza')">Bio &amp; Talk</button>
+      </div>
+
     </div>
-    <p class="tba-note">Additional speakers to be announced.</p>
+  </div>
+
+  <!-- SPEAKER MODALS -->
+  <div class="modal-overlay" id="modal-jeknov" onclick="closeModalOnOverlay(event, 'modal-jeknov')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-jeknov')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
+               onerror="this.parentNode.innerHTML='JN'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://jeknov.github.io/" target="_blank">Jekaterina Novikova</a></div>
+          <div class="modal-affil">Principal AI Scientist, Vanguard Group</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Jekaterina Novikova is a Principal AI Scientist at Vanguard, specializing in computational models of natural language processing. Her work spans AI-powered natural language generation, machine learning for detecting cognitive impairment and mental health issues, and advancing human-robot interaction. She holds a PhD in Computer Science from the University of Bath and brings over a decade of experience in AI research across industry, academia, and non-profit organizations. She has contributed to major open-source AI projects including BLOOM LLM and BIG-Bench, and has been recognized as one of the Top 50 Most Extraordinary Women Advancing AI (2024) and Top 25 Women in AI in Canada (2022).</p>
+      <div class="modal-section-label">Talk Abstract</div>
+      <p class="modal-tba">To be announced.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-sirisha" onclick="closeModalOnOverlay(event, 'modal-sirisha')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-sirisha')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
+               onerror="this.parentNode.innerHTML='SR'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://sirisharambhatla.com/" target="_blank">Sirisha Rambhatla</a></div>
+          <div class="modal-affil">Assistant Professor, University of Waterloo</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Sirisha Rambhatla, Ph.D., holds the Val O'Donovan Chair in Efficient, Safe, and Adaptive AI in the Faculty of Engineering and is an Assistant Professor in the Management Science and Engineering Department at the University of Waterloo, with cross-appointments in Systems Design Engineering and the David R. Cheriton School of Computer Science. Her research centers on the belief that machine learning systems deployed in high-stakes environments must be efficient enough to be practical, adaptive enough to be useful, and safe enough to be trusted. As Director of the Critical Machine Learning Lab, she develops models that meet all three demands, with applications spanning healthcare, manufacturing, and aviation. Her work has garnered over 50 publications and wide media coverage, and has been recognized with the 2025 Engineering Research Excellence Award and the 2025 Outstanding Performance Award from the University of Waterloo, and the 2021 Merit Award for Excellence in Postdoctoral Research from the University of Southern California. She earned her Ph.D. and M.S. in Electrical Engineering from the University of Minnesota, Twin Cities.</p>
+      <div class="modal-section-label">Talk: Efficient and Safe LLM Adaptation: Advances in Training, Surprises in Safety</div>
+      <p class="modal-text">Adapting large language models (LLMs) to new tasks and deployment contexts is central to how AI systems are built and used, yet adaptation needs to be understood from two critical angles: efficiency and safety. In this talk, I examine both. First, I present SubTrack++, a training algorithm that leverages subspace tracking, a projection-aware optimizer, and rescaling normalization to simultaneously achieve state-of-the-art performance on memory, wall-time, and loss. Second, I show that adaptation is not just a resource problem but a safety one: even routine, well-intentioned fine-tuning has been shown to silently erode safety guardrails, yet no systematic characterization of this risk existed across models. To this end, I introduce TamperBench, the first benchmark of safety robustness under fine-tuning across 21 open-weight LLMs, revealing surprising disparities in how different models respond to tampering. As LLMs are adapted at ever-increasing scale, we need to treat efficiency and safety not as separate tracks, but as joint design criteria for the next generation of solutions.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-reza" onclick="closeModalOnOverlay(event, 'modal-reza')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-reza')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://www.ee.torontomu.ca/~samavi/images/Reza_05_s.jpg" alt="Reza Samavi"
+               onerror="this.parentNode.innerHTML='RS'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://www.ee.torontomu.ca/~samavi/about.html" target="_blank">Reza Samavi</a></div>
+          <div class="modal-affil">Associate Professor, Toronto Metropolitan University</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Reza Samavi is an Associate Professor in the Department of Electrical, Computer, and Biomedical Engineering at Toronto Metropolitan University and a faculty affiliate with the Vector Institute for Artificial Intelligence. He received his PhD from the University of Toronto. His research interests include Data Security &amp; Privacy, Safety &amp; Security of Machine Learning models, and Trustworthy AI. He has received research funding from NSERC, SOSCIP, MITACS, HHS, and IDEaS, and has been recognized with the Privacy Technologies Research Award from IBM and the Privacy By Design Research Award from the Information and Privacy Commissioner of Ontario.</p>
+      <div class="modal-section-label">Talk Abstract</div>
+      <p class="modal-tba">To be announced.</p>
+    </div>
   </div>
 
   <!-- ORGANIZERS -->
@@ -495,5 +623,26 @@
   <p>DMP Workshop @ AI/CRV 2026 &nbsp;·&nbsp; Data and Model Protection in Generative AI</p>
 </footer>
 
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOnOverlay(e, id) {
+    if (e.target === e.currentTarget) closeModal(id);
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
 </body>
 </html>
