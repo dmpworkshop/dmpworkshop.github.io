@@ -468,6 +468,16 @@
         <button class="speaker-bio-btn" onclick="openModal('modal-reza')">Bio &amp; Talk</button>
       </div>
 
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://mathias.lecuyer.me/assets/images/mathias-lecuyer.jpg" alt="Mathias Lécuyer"
+               onerror="this.parentNode.innerHTML='ML'">
+        </div>
+        <div class="speaker-name"><a href="https://mathias.lecuyer.me/" target="_blank" style="color:inherit;">Mathias Lécuyer</a></div>
+        <div class="speaker-affil">University of British Columbia</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-mathias')">Bio &amp; Talk</button>
+      </div>
+
     </div>
     <p class="tba-note">Additional speakers to be announced.</p>
   </div>
@@ -529,6 +539,26 @@
       </div>
       <div class="modal-section-label">Bio</div>
       <p class="modal-text">Reza Samavi is an Associate Professor in the Department of Electrical, Computer, and Biomedical Engineering at Toronto Metropolitan University and a faculty affiliate with the Vector Institute for Artificial Intelligence. He received his PhD from the University of Toronto. His research interests include Data Security &amp; Privacy, Safety &amp; Security of Machine Learning models, and Trustworthy AI. He has received research funding from NSERC, SOSCIP, MITACS, HHS, and IDEaS, and has been recognized with the Privacy Technologies Research Award from IBM and the Privacy By Design Research Award from the Information and Privacy Commissioner of Ontario.</p>
+      <div class="modal-section-label">Talk Abstract</div>
+      <p class="modal-tba">To be announced.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-mathias" onclick="closeModalOnOverlay(event, 'modal-mathias')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-mathias')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://mathias.lecuyer.me/assets/images/mathias-lecuyer.jpg" alt="Mathias Lécuyer"
+               onerror="this.parentNode.innerHTML='ML'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://mathias.lecuyer.me/" target="_blank">Mathias Lécuyer</a></div>
+          <div class="modal-affil">Assistant Professor, University of British Columbia</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Mathias Lécuyer is an Assistant Professor at the University of British Columbia, where he is part of the ML, Systems, and Security &amp; Privacy groups, as well as CAIDA and TrustML. He is also Head of Research at Wiremind. Prior to joining UBC, he was a postdoctoral researcher at Microsoft Research New York and completed his PhD at Columbia University. His research focuses on trustworthy AI, with an emphasis on enforcing provable guarantees in models and their data ecosystems, spanning privacy, adversarial robustness, explainability, and causal machine learning. His foundational work on Randomized Smoothing — the only technique to provably ensure robustness that scales to large AI models — has garnered over a thousand citations.</p>
       <div class="modal-section-label">Talk Abstract</div>
       <p class="modal-tba">To be announced.</p>
     </div>
