@@ -478,6 +478,16 @@
         <button class="speaker-bio-btn" onclick="openModal('modal-mathias')">Bio &amp; Talk</button>
       </div>
 
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://www.cs.sfu.ca/~linyi/res/avatar/linyili.jpg" alt="Linyi Li"
+               onerror="this.parentNode.innerHTML='LL'">
+        </div>
+        <div class="speaker-name"><a href="https://www.cs.sfu.ca/~linyi/" target="_blank" style="color:inherit;">Linyi Li</a></div>
+        <div class="speaker-affil">Simon Fraser University</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-linyi')">Bio &amp; Talk</button>
+      </div>
+
     </div>
     <p class="tba-note">Additional speakers to be announced.</p>
   </div>
@@ -561,6 +571,26 @@
       <p class="modal-text">Mathias Lécuyer is an Assistant Professor at the University of British Columbia, where he is part of the ML, Systems, and Security &amp; Privacy groups, as well as CAIDA and TrustML. He is also Head of Research at Wiremind. Prior to joining UBC, he was a postdoctoral researcher at Microsoft Research New York and completed his PhD at Columbia University. His research focuses on trustworthy AI, with an emphasis on enforcing provable guarantees in models and their data ecosystems, spanning privacy, adversarial robustness, explainability, and causal machine learning. His foundational work on Randomized Smoothing — the only technique to provably ensure robustness that scales to large AI models — has garnered over a thousand citations.</p>
       <div class="modal-section-label">Talk Abstract</div>
       <p class="modal-tba">To be announced.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-linyi" onclick="closeModalOnOverlay(event, 'modal-linyi')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-linyi')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://www.cs.sfu.ca/~linyi/res/avatar/linyili.jpg" alt="Linyi Li"
+               onerror="this.parentNode.innerHTML='LL'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://www.cs.sfu.ca/~linyi/" target="_blank">Linyi Li</a></div>
+          <div class="modal-affil">Assistant Professor, Simon Fraser University</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Linyi Li is an Assistant Professor in the School of Computing Science at Simon Fraser University, where he directs the TAI Lab. His research focuses on trustworthy deep learning, with an emphasis on certifiably trustworthy deep learning and trustworthy foundation models, spanning machine learning and computer security. He works on enabling certifiable and verifiable trustworthiness guarantees (such as robustness, fairness, and numerical reliability) for large-scale deep learning systems, and on scientifically evaluating foundation models. He has published over 30 papers at top venues including ICML, NeurIPS, ICLR, IEEE S&amp;P, and ACM CCS, and has received the Rising Stars in Data Science award, the AdvML Rising Star Award, and the Wing Kai Cheng Fellowship. He received his PhD in Computer Science from the University of Illinois Urbana-Champaign.</p>
+      <div class="modal-section-label">Talk: Towards Scientific Evaluation for Code LLMs</div>
+      <p class="modal-text">Large Language Models (LLMs) are fundamentally reshaping the software development landscape, necessitating rigorous new standards for evaluation. In this talk, I introduce three representative benchmarks that capture the progression of code intelligence: InfiBench (NeurIPS 2024), RV-Bench (AAAI 2026), and AppForge (ICLR 2026). I will detail how these frameworks target distinct capabilities: InfiBench utilizes expert-curated Q&amp;A to assess core software development proficiency; RV-Bench challenges mathematical reasoning and robustness through randomly injected variables in logic puzzles; and AppForge provides a complex, interactive environment for evaluating end-to-end Android application development. Developed between 2023 and 2025, these co-evolving benchmarks do not merely track progress but actively define it — balancing user-centric alignment with rigorous scientific principles. Finally, I will discuss the lessons learned through building these benchmarks, how these benchmarks have provided critical insights to guide the training of frontier models, and conclude by envisioning the future of benchmark research.</p>
     </div>
   </div>
 
