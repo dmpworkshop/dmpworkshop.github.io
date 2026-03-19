@@ -449,6 +449,16 @@
 
       <div class="speaker-card">
         <div class="speaker-avatar">
+          <img src="assets/img/yangyi-liu.jpg" alt="Yangyi Liu"
+               onerror="this.parentNode.innerHTML='YL'">
+        </div>
+        <div class="speaker-name">Yangyi Liu</div>
+        <div class="speaker-affil">Vanguard Group</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-yangyi')">Bio &amp; Talk</button>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">
           <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
                referrerpolicy="no-referrer"
                onerror="this.parentNode.innerHTML='SR'">
@@ -508,6 +518,26 @@
       </div>
       <div class="modal-section-label">Bio</div>
       <p class="modal-text">Jekaterina Novikova is a Principal AI Scientist at Vanguard, specializing in computational models of natural language processing. Her work spans AI-powered natural language generation, machine learning for detecting cognitive impairment and mental health issues, and advancing human-robot interaction. She holds a PhD in Computer Science from the University of Bath and brings over a decade of experience in AI research across industry, academia, and non-profit organizations. She has contributed to major open-source AI projects including BLOOM LLM and BIG-Bench, and has been recognized as one of the Top 50 Most Extraordinary Women Advancing AI (2024) and Top 25 Women in AI in Canada (2022).</p>
+      <div class="modal-section-label">Talk Abstract</div>
+      <p class="modal-tba">To be announced.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-yangyi" onclick="closeModalOnOverlay(event, 'modal-yangyi')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-yangyi')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="assets/img/yangyi-liu.jpg" alt="Yangyi Liu"
+               onerror="this.parentNode.innerHTML='YL'">
+        </div>
+        <div>
+          <div class="modal-title">Yangyi Liu</div>
+          <div class="modal-affil">Senior AI/ML Scientist, Vanguard Group</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Yangyi Liu is a Senior AI/ML Scientist at Vanguard, specializing in pattern recognition, knowledge extraction, and structured representation learning from domain-specific data. His research focuses on applying ML/AI models and techniques to convert unstructured data into structured representations for training, aligning, and improving AI models. His expertise encompasses trustworthy and explainable AI, structured knowledge representation, information theory, and LLMs. He completed his PhD at McMaster University. His work now focuses on bridging fundamental research and applied solutions, creating solutions that address practical challenges and advance transparency and reliability in AI.</p>
       <div class="modal-section-label">Talk Abstract</div>
       <p class="modal-tba">To be announced.</p>
     </div>
