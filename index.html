@@ -498,6 +498,17 @@
         <button class="speaker-bio-btn" onclick="openModal('modal-linyi')">Bio &amp; Talk</button>
       </div>
 
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://datajusticelab.org/wp-content/uploads/2024/05/joanna-redden.webp" alt="Joanna Redden"
+               referrerpolicy="no-referrer"
+               onerror="this.parentNode.innerHTML='JR'">
+        </div>
+        <div class="speaker-name"><a href="https://www.fims.uwo.ca/people/profiles/joanna_redden.html" target="_blank" style="color:inherit;">Joanna Redden</a></div>
+        <div class="speaker-affil">Western University</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-joanna')">Bio &amp; Talk</button>
+      </div>
+
     </div>
     <p class="tba-note">Additional speakers to be announced.</p>
   </div>
@@ -621,6 +632,27 @@
       <p class="modal-text">Linyi Li is an Assistant Professor in the School of Computing Science at Simon Fraser University, where he directs the TAI Lab. His research focuses on trustworthy deep learning, with an emphasis on certifiably trustworthy deep learning and trustworthy foundation models, spanning machine learning and computer security. He works on enabling certifiable and verifiable trustworthiness guarantees (such as robustness, fairness, and numerical reliability) for large-scale deep learning systems, and on scientifically evaluating foundation models. He has published over 30 papers at top venues including ICML, NeurIPS, ICLR, IEEE S&amp;P, and ACM CCS, and has received the Rising Stars in Data Science award, the AdvML Rising Star Award, and the Wing Kai Cheng Fellowship. He received his PhD in Computer Science from the University of Illinois Urbana-Champaign.</p>
       <div class="modal-section-label">Talk: Towards Scientific Evaluation for Code LLMs</div>
       <p class="modal-text">Large Language Models (LLMs) are fundamentally reshaping the software development landscape, necessitating rigorous new standards for evaluation. In this talk, I introduce three representative benchmarks that capture the progression of code intelligence: InfiBench (NeurIPS 2024), RV-Bench (AAAI 2026), and AppForge (ICLR 2026). I will detail how these frameworks target distinct capabilities: InfiBench utilizes expert-curated Q&amp;A to assess core software development proficiency; RV-Bench challenges mathematical reasoning and robustness through randomly injected variables in logic puzzles; and AppForge provides a complex, interactive environment for evaluating end-to-end Android application development. Developed between 2023 and 2025, these co-evolving benchmarks do not merely track progress but actively define it — balancing user-centric alignment with rigorous scientific principles. Finally, I will discuss the lessons learned through building these benchmarks, how these benchmarks have provided critical insights to guide the training of frontier models, and conclude by envisioning the future of benchmark research.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-joanna" onclick="closeModalOnOverlay(event, 'modal-joanna')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-joanna')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://datajusticelab.org/wp-content/uploads/2024/05/joanna-redden.webp" alt="Joanna Redden"
+               referrerpolicy="no-referrer"
+               onerror="this.parentNode.innerHTML='JR'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://www.fims.uwo.ca/people/profiles/joanna_redden.html" target="_blank">Joanna Redden</a></div>
+          <div class="modal-affil">Associate Professor, Faculty of Information &amp; Media Studies, Western University</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Joanna Redden is an Associate Professor at the Faculty of Information &amp; Media Studies (FIMS) at Western University and co-director of the Starling Centre and the UK-based Data Justice Lab. Her research focuses on datafication, politics, governance, and social justice. She is currently working on projects that map and analyze the social and political implications of increasing government uses of AI and automated data systems, learn from data harms and those working to redress them, and advance civic participation in datafied societies. She is co-author of <em>Understanding Media: Communication, Power and Social Change</em> (Penguin, 2024) and <em>Data Justice</em> (Sage, 2022), and author of <em>The Mediation of Poverty</em> (Lexington, 2014). Prior to joining Western, she was a Senior Lecturer at Cardiff University and an Assistant Professor at the University of Calgary. She holds a PhD from Goldsmiths University of London.</p>
+      <div class="modal-section-label">Talk Abstract</div>
+      <p class="modal-tba">To be announced.</p>
     </div>
   </div>
 
