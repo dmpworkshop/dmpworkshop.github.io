@@ -508,6 +508,17 @@
         <button class="speaker-bio-btn" onclick="openModal('modal-joanna')">Bio &amp; Talk</button>
       </div>
 
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://photos-professeurs.uqam.ca/images/fiche_professeur/m2/Cs%252bwEyQAgtQ_.jpg" alt="Sébastien Gambs"
+               referrerpolicy="no-referrer"
+               onerror="this.parentNode.innerHTML='SG'">
+        </div>
+        <div class="speaker-name"><a href="https://professeurs.uqam.ca/professeur/gambs.sebastien/" target="_blank" style="color:inherit;">Sébastien Gambs</a></div>
+        <div class="speaker-affil">Université du Québec à Montréal</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-sebastien')">Bio &amp; Talk</button>
+      </div>
+
     </div>
     <p class="tba-note">Additional speakers to be announced.</p>
   </div>
@@ -651,6 +662,27 @@
       <p class="modal-text">Joanna Redden is an Associate Professor at the Faculty of Information &amp; Media Studies (FIMS) at Western University and co-director of the Starling Centre and the UK-based Data Justice Lab. Her research focuses on datafication, politics, governance, and social justice. She is currently working on projects that map and analyze the social and political implications of increasing government uses of AI and automated data systems, learn from data harms and those working to redress them, and advance civic participation in datafied societies. She is co-author of <em>Understanding Media: Communication, Power and Social Change</em> (Penguin, 2024) and <em>Data Justice</em> (Sage, 2022), and author of <em>The Mediation of Poverty</em> (Lexington, 2014). Prior to joining Western, she was a Senior Lecturer at Cardiff University and an Assistant Professor at the University of Calgary. She holds a PhD from Goldsmiths University of London.</p>
       <div class="modal-section-label">Talk Abstract</div>
       <p class="modal-tba">To be announced.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-sebastien" onclick="closeModalOnOverlay(event, 'modal-sebastien')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-sebastien')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://photos-professeurs.uqam.ca/images/fiche_professeur/m2/Cs%252bwEyQAgtQ_.jpg" alt="Sébastien Gambs"
+               referrerpolicy="no-referrer"
+               onerror="this.parentNode.innerHTML='SG'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://professeurs.uqam.ca/professeur/gambs.sebastien/" target="_blank">Sébastien Gambs</a></div>
+          <div class="modal-affil">Professor &amp; Canada Research Chair, Université du Québec à Montréal</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Sébastien Gambs has held the Canada Research Chair in Privacy and Ethical Analysis of Massive Data since December 2017 and has been a professor in the Department of Computer Science at the Université du Québec à Montréal since January 2016. His main research theme is privacy in the digital world. He is also interested in solving long-term scientific questions such as the existing tensions between massive data analysis and privacy, as well as ethical issues including fairness, transparency, and algorithmic accountability raised by personalized systems.</p>
+      <div class="modal-section-label">Talk: Understanding and Addressing Fairwashing in Machine Learning</div>
+      <p class="modal-text">Fairwashing refers to the risk that an unfair black-box model can be explained by a fairer model through post-hoc explanation manipulation. In this talk, I will first discuss how fairwashing attacks can transfer across black-box models, meaning that other black-box models can perform fairwashing without explicitly using their predictions. This generalization and transferability of fairwashing attacks imply that their detection will be difficult in practice. Finally, I will nonetheless review some possible avenues of research on how to limit the potential for fairwashing.</p>
     </div>
   </div>
 
