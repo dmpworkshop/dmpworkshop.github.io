@@ -519,6 +519,16 @@
         <button class="speaker-bio-btn" onclick="openModal('modal-sebastien')">Bio &amp; Talk</button>
       </div>
 
+      <div class="speaker-card">
+        <div class="speaker-avatar">
+          <img src="https://ecreager.github.io/img/profile.jpg" alt="Elliot Creager"
+               onerror="this.parentNode.innerHTML='EC'">
+        </div>
+        <div class="speaker-name"><a href="https://ecreager.github.io/" target="_blank" style="color:inherit;">Elliot Creager</a></div>
+        <div class="speaker-affil">University of Waterloo</div>
+        <button class="speaker-bio-btn" onclick="openModal('modal-elliot')">Bio &amp; Talk</button>
+      </div>
+
     </div>
     <p class="tba-note">Additional speakers to be announced.</p>
   </div>
@@ -683,6 +693,26 @@
       <p class="modal-text">Sébastien Gambs has held the Canada Research Chair in Privacy and Ethical Analysis of Massive Data since December 2017 and has been a professor in the Department of Computer Science at the Université du Québec à Montréal since January 2016. His main research theme is privacy in the digital world. He is also interested in solving long-term scientific questions such as the existing tensions between massive data analysis and privacy, as well as ethical issues including fairness, transparency, and algorithmic accountability raised by personalized systems.</p>
       <div class="modal-section-label">Talk: Understanding and Addressing Fairwashing in Machine Learning</div>
       <p class="modal-text">Fairwashing refers to the risk that an unfair black-box model can be explained by a fairer model through post-hoc explanation manipulation. In this talk, I will first discuss how fairwashing attacks can transfer across black-box models, meaning that other black-box models can perform fairwashing without explicitly using their predictions. This generalization and transferability of fairwashing attacks imply that their detection will be difficult in practice. Finally, I will nonetheless review some possible avenues of research on how to limit the potential for fairwashing.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-elliot" onclick="closeModalOnOverlay(event, 'modal-elliot')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-elliot')">&times;</button>
+      <div class="modal-header">
+        <div class="modal-avatar">
+          <img src="https://ecreager.github.io/img/profile.jpg" alt="Elliot Creager"
+               onerror="this.parentNode.innerHTML='EC'">
+        </div>
+        <div>
+          <div class="modal-title"><a href="https://ecreager.github.io/" target="_blank">Elliot Creager</a></div>
+          <div class="modal-affil">Assistant Professor, University of Waterloo</div>
+        </div>
+      </div>
+      <div class="modal-section-label">Bio</div>
+      <p class="modal-text">Elliot Creager is an Assistant Professor in the Department of Electrical and Computer Engineering at the University of Waterloo, where he directs the Socially Embedded Machine Intelligence (SEMI) lab. His research focuses on building reliable and equitable AI systems that promote user data autonomy. He is a Faculty Affiliate at the Vector Institute for Artificial Intelligence and the Schwartz Reisman Institute for Technology and Society.</p>
+      <div class="modal-section-label">Talk: The Role of Coordination and Collective Action in Trustworthy Machine Learning</div>
+      <p class="modal-text">The integration of AI into daily life has generated considerable attention and excitement, while also raising concerns about automating algorithmic harms and re-entrenching existing social inequities. While the responsible deployment of trustworthy AI systems is a worthy goal, there are many possible ways to realize it, from policy and regulation to improved algorithm design and evaluation. In fact, since AI trains on social data, there is even a possibility for everyday users, citizens, or workers to directly steer its behavior through Algorithmic Collective Action, by deliberately modifying the data they share with a platform to drive its learning process in their favor. I will discuss a few recent and ongoing projects from my lab that explore this theme.</p>
     </div>
   </div>
 
