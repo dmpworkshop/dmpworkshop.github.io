@@ -56,6 +56,9 @@
       color: rgba(255,255,255,.65);
       font-size: .83rem; font-weight: 500;
       transition: color .15s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
     }
     .nav-links a:hover { color: #fff; text-decoration: none; }
     .nav-links a.nav-active { color: #fff; }
@@ -318,10 +321,10 @@
     .footer-links a:hover { color: var(--indigo); }
 
     @media (max-width: 640px) {
-      .nav-inner { flex-direction: column; height: auto; padding: .5rem 1rem; gap: .4rem; align-items: flex-start; }
-      .nav-links { gap: 0; overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { font-size: .78rem; padding: .3rem .7rem .3rem 0; white-space: nowrap; }
+      .nav-inner { flex-direction: column; height: auto; padding: .4rem 1rem .5rem; gap: .35rem; align-items: flex-start; }
+      .nav-links { flex-wrap: wrap; gap: .15rem .1rem; width: 100%; }
+      .nav-links a { font-size: .75rem; padding: .2rem .55rem; border-radius: 3px; }
+      .nav-links a.nav-active { background: rgba(255,255,255,.15); color: #fff; }
       .hero-dates { flex-wrap: wrap; gap: .3rem 0; }
       .hd-item { white-space: nowrap; }
     }
@@ -334,11 +337,11 @@
   <div class="nav-inner">
     <div class="nav-logo">DMP @ AI/CRV 2026</div>
     <div class="nav-links">
-      <a href="#" onclick="showPage('page-about',this);return false;" class="nav-active">About</a>
-      <a href="#" onclick="showPage('page-speakers',this);return false;">Speakers</a>
-      <a href="#" onclick="showPage('page-schedule',this);return false;">Schedule</a>
-      <a href="#" onclick="showPage('page-organizers',this);return false;">Organizers</a>
-      <a href="#" onclick="showPage('page-cfp',this);return false;">Call for Papers</a>
+      <a href="javascript:void(0)" onclick="showPage('page-about',this)" class="nav-active">About</a>
+      <a href="javascript:void(0)" onclick="showPage('page-speakers',this)">Speakers</a>
+      <a href="javascript:void(0)" onclick="showPage('page-schedule',this)">Schedule</a>
+      <a href="javascript:void(0)" onclick="showPage('page-organizers',this)">Organizers</a>
+      <a href="javascript:void(0)" onclick="showPage('page-cfp',this)">Call for Papers</a>
     </div>
   </div>
 </nav>
