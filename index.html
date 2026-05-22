@@ -252,6 +252,10 @@
     .modal-text { font-size: .92rem; color: #2a2a2a; line-height: 1.65; }
     .modal-text + .modal-text { margin-top: .8rem; }
 
+    /* ── PASSED DATES ── */
+    .date-passed { text-decoration: line-through; opacity: .5; }
+    .date-passed-label { font-size: .78rem; color: var(--muted); font-weight: 400; margin-left: .35rem; font-style: italic; }
+
     /* ── ABSTRACT LINK (schedule) ── */
     .abstract-link {
       background: none; border: none; padding: 0; cursor: pointer;
@@ -354,10 +358,10 @@
     </div>
     <div class="hero-dates">
       <div class="hd-item">
-        <span class="hd-label">Submission deadline:</span><span class="hd-value">April 30, 2026 (AoE)</span>
+        <span class="hd-label">Submission deadline:</span><span class="hd-value date-passed">April 30, 2026 (AoE)</span>
       </div>
       <div class="hd-item">
-        <span class="hd-label">Notification:</span><span class="hd-value">April 30, 2026 (AoE)</span>
+        <span class="hd-label">Notification:</span><span class="hd-value date-passed">April 30, 2026 (AoE)</span>
       </div>
       <div class="hd-item">
         <span class="hd-label">Workshop:</span><span class="hd-value">May 25, 2026</span>
@@ -390,12 +394,12 @@
       <table class="dates-table">
         <tbody>
           <tr>
-            <td>April 30, 2026</td>
-            <td>Submission deadline &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+            <td><s class="date-passed">April 30, 2026</s></td>
+            <td><s class="date-passed">Submission deadline &nbsp;<span style="font-size:.88em">(AoE)</span></s><span class="date-passed-label">passed</span></td>
           </tr>
           <tr>
-            <td>April 30, 2026</td>
-            <td>Notification of decisions &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+            <td><s class="date-passed">April 30, 2026</s></td>
+            <td><s class="date-passed">Notification of decisions &nbsp;<span style="font-size:.88em">(AoE)</span></s><span class="date-passed-label">passed</span></td>
           </tr>
           <tr class="highlight">
             <td>May 25, 2026</td>
@@ -483,6 +487,15 @@
 
         <div class="speaker-card">
           <div class="speaker-avatar">
+            <img src="https://www.ee.torontomu.ca/~samavi/images/maleki.jpg" alt="Mohammadreza Maleki"
+                 onerror="this.parentNode.innerHTML='MM'">
+          </div>
+          <div class="speaker-name">Mohammadreza Maleki</div>
+          <div class="speaker-affil">Toronto Metropolitan University</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
             <img src="assets/img/elliot-creager.jpg" alt="Elliot Creager"
                  onerror="this.parentNode.innerHTML='EC'">
           </div>
@@ -549,7 +562,7 @@
 
         <tr>
           <td class="sched-time">11:25–11:50</td>
-          <td class="sched-speaker">Reza Samavi<span class="sched-note">Toronto Metropolitan University<br>Presented by Mohammadreza Maleki</span></td>
+          <td class="sched-speaker">Mohammadreza Maleki<span class="sched-note">Toronto Metropolitan University</span></td>
           <td class="sched-talk">
             <button class="abstract-link" onclick="openModal('abs-reza')">Rethinking the Tightness–Efficiency Trade-off in Certified Robustness</button>
             <span class="sched-note">20 min + 5 min Q&amp;A</span>
@@ -559,7 +572,9 @@
         <tr>
           <td class="sched-time">11:50–12:20</td>
           <td class="sched-speaker">Student Lightning Talks</td>
-          <td class="sched-talk">5 presentations × 5 min</td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-lightning')">5 presentations × 5 min</button>
+          </td>
         </tr>
 
         <!-- LUNCH -->
@@ -613,6 +628,36 @@
 
     <!-- ABSTRACT MODALS -->
 
+    <div class="modal-overlay" id="abs-lightning" onclick="closeModalOnOverlay(event,'abs-lightning')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-lightning')">&times;</button>
+        <div class="modal-speaker-label">Student Lightning Talks · 11:50–12:20 PDT</div>
+        <div class="modal-talk-title" style="margin-bottom:1.2rem;">5 presentations × 5 min</div>
+        <table style="width:100%; border-collapse:collapse; font-size:.91rem;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:.65rem .4rem .65rem 0; vertical-align:top; color:var(--muted); font-weight:500; white-space:nowrap; width:1%; padding-right:.9rem;">Zhihao Li</td>
+            <td style="padding:.65rem 0; vertical-align:top; line-height:1.45;">When Priors Backfire: On the Vulnerability of Unlearnable Examples to Pretraining</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:.65rem .4rem .65rem 0; vertical-align:top; color:var(--muted); font-weight:500; white-space:nowrap; padding-right:.9rem;">Eliott Baltz</td>
+            <td style="padding:.65rem 0; vertical-align:top; line-height:1.45;">Model Stealing Through the Lens of Model Multiplicity</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:.65rem .4rem .65rem 0; vertical-align:top; color:var(--muted); font-weight:500; white-space:nowrap; padding-right:.9rem;">Vaishali Meena Meyappan</td>
+            <td style="padding:.65rem 0; vertical-align:top; line-height:1.45;">Uncertainty Quantification in Large Language Models via Adaptive Conformal Prediction</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:.65rem .4rem .65rem 0; vertical-align:top; color:var(--muted); font-weight:500; white-space:nowrap; padding-right:.9rem;">Lipeng He <span style="font-weight:400;font-style:italic;">(online)</span></td>
+            <td style="padding:.65rem 0; vertical-align:top; line-height:1.45;"><a href="https://openreview.net/forum?id=1JBK4x8ik9" target="_blank">Locket: Robust Feature-Locking Technique for Language Models</a></td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem .4rem .65rem 0; vertical-align:top; color:var(--muted); font-weight:500; white-space:nowrap; padding-right:.9rem;">Abishek Seethalakshmi Madhanan <span style="font-weight:400;font-style:italic;">(online)</span></td>
+            <td style="padding:.65rem 0; vertical-align:top; line-height:1.45;">Watermarking, Provenance, and Model Protection in Generative AI: Policy and Practice</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="abs-vanguard" onclick="closeModalOnOverlay(event,'abs-vanguard')">
       <div class="modal-box">
         <button class="modal-close" onclick="closeModal('abs-vanguard')">&times;</button>
@@ -643,7 +688,7 @@
     <div class="modal-overlay" id="abs-reza" onclick="closeModalOnOverlay(event,'abs-reza')">
       <div class="modal-box">
         <button class="modal-close" onclick="closeModal('abs-reza')">&times;</button>
-        <div class="modal-speaker-label">Reza Samavi · Toronto Metropolitan University · <em>Presented by Mohammadreza Maleki</em></div>
+        <div class="modal-speaker-label">Mohammadreza Maleki · Toronto Metropolitan University</div>
         <div class="modal-talk-title">Rethinking the Tightness–Efficiency Trade-off in Certified Robustness</div>
         <p class="modal-text">Certified robustness of deep neural networks can be formulated as a nonconvex worst-case analysis problem, where one seeks the largest norm-bounded perturbation set within which the model's prediction is provably invariant. This problem is inherently intractable for ReLU networks, as it reduces to a nonconvex QCQP. Consequently, practical certification relies on convex relaxations that trade tightness for scalability. In this talk, we present recent advances in strengthening such relaxations. We first discuss a hierarchy of second-order cone programming (SOCP) relaxations that systematically tighten the linear programming (LP) bound at moderate computational overhead. We then examine the verification–training misalignment problem, wherein models trained with one relaxation are certified using another, often leading to suboptimal guarantees. We will discuss our recent work on a cascading verification framework where the approach improves the tightness–efficiency trade-off while partially aligning training and verification objectives through a multi-verifier perspective.</p>
       </div>
