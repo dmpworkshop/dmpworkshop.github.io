@@ -58,6 +58,7 @@
       transition: color .15s;
     }
     .nav-links a:hover { color: #fff; text-decoration: none; }
+    .nav-links a.nav-active { color: #fff; }
 
     /* ── HERO ── */
     #home {
@@ -117,15 +118,17 @@
     /* ── PAGE LAYOUT ── */
     .page-wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
 
+    /* ── PAGE TABS ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
     /* ── SECTION ── */
     .section {
       padding: 3.2rem 0;
       border-bottom: 1px solid var(--border);
     }
     .section:last-child { border-bottom: none; }
-    .section-header {
-      margin-bottom: 1.4rem;
-    }
+    .section-header { margin-bottom: 1.4rem; }
     h2 {
       font-family: var(--serif);
       font-size: clamp(1.25rem, 2.5vw, 1.65rem);
@@ -213,16 +216,10 @@
       overflow: hidden;
     }
     .speaker-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .speaker-name { font-family: var(--serif); font-size: .97rem; font-weight: 600; color: var(--text); }
+    .speaker-name { font-family: var(--serif); font-size: .97rem; font-weight: 600; }
+    .speaker-name a { color: var(--indigo); }
+    .speaker-name a:hover { text-decoration: underline; }
     .speaker-affil { font-size: .82rem; color: var(--muted); margin-top: .15rem; }
-    .tba-note { margin-top: 1rem; font-size: .88rem; color: var(--muted); font-style: italic; }
-    .speaker-bio-btn {
-      display: inline-block; margin-top: .5rem;
-      font-size: .78rem; font-weight: 600; color: var(--indigo);
-      cursor: pointer; border: none; background: none; padding: 0;
-      text-decoration: underline; text-underline-offset: 2px;
-    }
-    .speaker-bio-btn:hover { color: var(--indigo-d); }
 
     /* ── MODAL ── */
     .modal-overlay {
@@ -243,24 +240,45 @@
       cursor: pointer; color: var(--muted);
     }
     .modal-close:hover { color: var(--text); }
-    .modal-header { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1.2rem; }
-    .modal-avatar {
-      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
-      overflow: hidden; border: 2px solid var(--border);
-      background: var(--indigo-lt);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--indigo);
-    }
-    .modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
-    .modal-affil { font-size: .85rem; color: var(--muted); margin-top: .15rem; }
-    .modal-section-label {
-      font-family: var(--serif); font-size: .88rem; font-weight: 700;
+    .modal-speaker-label {
+      font-family: var(--serif); font-size: .82rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .6px;
-      color: var(--indigo); margin: 1.1rem 0 .4rem;
+      color: var(--indigo); margin-bottom: .5rem;
+    }
+    .modal-talk-title {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 700;
+      color: var(--text); margin-bottom: 1rem; line-height: 1.35;
     }
     .modal-text { font-size: .92rem; color: #2a2a2a; line-height: 1.65; }
-    .modal-tba { font-size: .9rem; color: var(--muted); font-style: italic; }
+    .modal-text + .modal-text { margin-top: .8rem; }
+
+    /* ── ABSTRACT LINK (schedule) ── */
+    .abstract-link {
+      background: none; border: none; padding: 0; cursor: pointer;
+      color: var(--indigo); font-size: inherit; font-family: inherit;
+      font-style: italic; text-align: left; line-height: 1.45;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+    .abstract-link:hover { color: var(--indigo-d); }
+
+    /* ── SCHEDULE ── */
+    .schedule-meta { font-size: .88rem; color: var(--muted); margin-bottom: 1.2rem; font-style: italic; }
+    .schedule-table { width: 100%; border-collapse: collapse; margin-top: .5rem; font-size: .93rem; }
+    .schedule-table tr { border-bottom: 1px solid var(--border); }
+    .schedule-table tr:last-child { border-bottom: none; }
+    .schedule-table td { padding: .75rem .6rem; vertical-align: top; }
+    .sched-time { width: 110px; color: var(--muted); font-weight: 500; white-space: nowrap; font-size: .86rem; padding-top: .85rem; }
+    .sched-speaker { width: 220px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    .sched-talk { color: #3a3a3a; line-height: 1.45; }
+    .sched-note { display: block; font-size: .78rem; color: var(--muted); font-style: normal; font-weight: 400; margin-top: .15rem; }
+    .sched-row-break td { background: var(--bg); color: var(--muted); font-style: italic; }
+    .sched-row-break .sched-speaker { font-weight: 500; }
+    .sched-section-header td { background: var(--indigo-lt); font-weight: 700; color: var(--indigo); font-family: var(--serif); font-size: .82rem; text-transform: uppercase; letter-spacing: .5px; padding: .45rem .6rem; }
+    @media (max-width: 640px) {
+      .sched-time { width: 80px; }
+      .sched-speaker { width: auto; }
+      .schedule-table td { padding: .6rem .4rem; }
+    }
 
     /* ── ORGANIZERS ── */
     .org-grid {
@@ -269,9 +287,7 @@
       gap: 2rem 1.5rem;
       margin-top: .5rem;
     }
-    .org-card {
-      text-align: center;
-    }
+    .org-card { text-align: center; }
     .org-photo-wrap {
       width: 130px; height: 130px; border-radius: 50%;
       margin: 0 auto .75rem;
@@ -284,26 +300,6 @@
     .org-initials { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--indigo); }
     .org-name { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.3; }
     .org-affil { font-size: .82rem; color: var(--muted); margin-top: .2rem; }
-
-    /* ── SCHEDULE ── */
-    .schedule-meta { font-size: .88rem; color: var(--muted); margin-bottom: 1.2rem; font-style: italic; }
-    .schedule-table { width: 100%; border-collapse: collapse; margin-top: .5rem; font-size: .93rem; }
-    .schedule-table tr { border-bottom: 1px solid var(--border); }
-    .schedule-table tr:last-child { border-bottom: none; }
-    .schedule-table td { padding: .75rem .6rem; vertical-align: top; }
-    .sched-time { width: 110px; color: var(--muted); font-weight: 500; white-space: nowrap; font-size: .86rem; padding-top: .85rem; }
-    .sched-speaker { width: 220px; font-weight: 600; color: var(--text); line-height: 1.4; }
-    .sched-talk { color: #3a3a3a; font-style: italic; line-height: 1.45; }
-    .sched-note { display: block; font-size: .78rem; color: var(--muted); font-style: normal; font-weight: 400; margin-top: .15rem; }
-    .sched-row-break td { background: var(--bg); color: var(--muted); font-style: italic; }
-    .sched-row-break .sched-speaker { font-weight: 500; }
-    .sched-row-break .sched-talk { color: var(--muted); }
-    .sched-section-header td { background: var(--indigo-lt); font-weight: 700; color: var(--indigo); font-family: var(--serif); font-size: .82rem; text-transform: uppercase; letter-spacing: .5px; padding: .45rem .6rem; }
-    @media (max-width: 640px) {
-      .sched-time { width: 80px; }
-      .sched-speaker { width: auto; }
-      .schedule-table td { padding: .6rem .4rem; }
-    }
 
     /* ── FOOTER ── */
     footer {
@@ -331,12 +327,11 @@
   <div class="nav-inner">
     <div class="nav-logo">DMP @ AI/CRV 2026</div>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#cfp">Call for Papers</a>
-      <a href="#dates">Dates</a>
-      <a href="#speakers">Speakers</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#organizers">Organizers</a>
+      <a href="#" onclick="showPage('page-about',this);return false;" class="nav-active">About</a>
+      <a href="#" onclick="showPage('page-speakers',this);return false;">Speakers</a>
+      <a href="#" onclick="showPage('page-schedule',this);return false;">Schedule</a>
+      <a href="#" onclick="showPage('page-organizers',this);return false;">Organizers</a>
+      <a href="#" onclick="showPage('page-cfp',this);return false;">Call for Papers</a>
     </div>
   </div>
 </nav>
@@ -374,538 +369,454 @@
 <!-- ── CONTENT ── -->
 <div class="page-wrap">
 
-  <!-- ABOUT -->
-  <div class="section" id="about">
-    <div class="section-header">
-      <h2>About the Workshop</h2>
-    </div>
-    <div class="prose">
-      <p>Generative Artificial Intelligence (GenAI) systems are increasingly deployed in high-impact domains, raising critical concerns about the protection of training data, deployed models, and generated outputs. These systems face a growing range of security and privacy risks, including data leakage, membership and attribute inference, model extraction, prompt injection, poisoning attacks, and misuse of generated content.</p>
-      <p>Addressing these challenges requires not only robust technical defenses, but also thoughtful alignment with emerging governance, regulatory, and policy frameworks.</p>
-      <p>The <strong>Data and Model Protection in Generative AI (DMP)</strong> workshop at AI/CRV 2026 brings together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
-    </div>
-  </div>
+  <!-- ═══ PAGE: ABOUT ═══ -->
+  <div class="page active" id="page-about">
 
-  <!-- CALL FOR PAPERS -->
-  <div class="section" id="cfp">
-    <div class="section-header">
-      <h2>Call for Papers</h2>
+    <div class="section" id="about">
+      <div class="section-header">
+        <h2>About the Workshop</h2>
+      </div>
+      <div class="prose">
+        <p>Generative Artificial Intelligence (GenAI) systems are increasingly deployed in high-impact domains, raising critical concerns about the protection of training data, deployed models, and generated outputs. These systems face a growing range of security and privacy risks, including data leakage, membership and attribute inference, model extraction, prompt injection, poisoning attacks, and misuse of generated content.</p>
+        <p>Addressing these challenges requires not only robust technical defenses, but also thoughtful alignment with emerging governance, regulatory, and policy frameworks.</p>
+        <p>The <strong>Data and Model Protection in Generative AI (DMP)</strong> workshop at AI/CRV 2026 brings together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
+      </div>
     </div>
 
-    <p class="topics-intro">We invite submissions to the Data and Model Protection in Generative AI workshop at AI/CRV 2026. This workshop aims to bring together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
-
-    <p class="topics-intro" style="margin-top:.8rem;">Topics include, but are not limited to, the following:</p>
-
-    <ul class="topic-list">
-      <li>Data poisoning, backdoor attacks, and defenses in machine learning</li>
-      <li>Privacy risks and training data leakage in generative models</li>
-      <li>Dataset provenance, attribution, and governance</li>
-      <li>Model extraction, model stealing, and intellectual property protection</li>
-      <li>Model watermarking, fingerprinting, and ownership verification</li>
-      <li>Security risks in generative AI (e.g., prompt injection, jailbreak attacks)</li>
-      <li>Robust and secure machine learning pipelines</li>
-      <li>Governance, auditing, and responsible deployment of AI systems</li>
-    </ul>
-
-    <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Submission Guidelines</h3>
-    <p style="font-size:.95rem; color:#2a2a2a; margin-bottom:.8rem;">Submissions may report new research results, empirical analyses, system implementations, benchmarks, negative results, or visionary perspectives (e.g., positions). We also welcome submissions of <strong>recently published work</strong> — authors may submit papers published at or accepted to a venue in 2025 or 2026 for presentation at the workshop.</p>
-    <ul class="fmt-list">
-      <li><strong>Long track:</strong> up to 9 pages (excluding references)</li>
-      <li><strong>Short track:</strong> up to 4 pages (excluding references)</li>
-      <li><strong>Formatting:</strong> use the official <a href="https://www.caiac.ca/en/conferences/canadianai-2026/call-papers" target="_blank">Canadian AI 2026 style files</a> and submit a single PDF. New submissions should be anonymized; published papers may be submitted in their published form.</li>
-      <li><strong>Appendix:</strong> include any supplementary material in the same PDF — no page limit for the appendix.</li>
-    </ul>
-
-    <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Review Process</h3>
-    <div class="review-box">
-      Submissions will be reviewed by the workshop program chairs. Accepted papers will be presented as talks or posters. The workshop is <strong>non-archival</strong>, and authors are free to submit extended versions of their work to archival venues.
+    <div class="section" id="dates">
+      <div class="section-header">
+        <h2>Important Dates</h2>
+      </div>
+      <table class="dates-table">
+        <tbody>
+          <tr>
+            <td>April 30, 2026</td>
+            <td>Submission deadline &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+          </tr>
+          <tr>
+            <td>April 30, 2026</td>
+            <td>Notification of decisions &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>May 25, 2026</td>
+            <td>Workshop day &nbsp;<span style="font-weight:400;font-size:.88em">— co-located with AI/CRV 2026</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <p style="margin-top:1.4rem;">
-      <a class="btn btn-primary" href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">
-        Submit on OpenReview &rarr;
-      </a>
-    </p>
-  </div>
+  </div><!-- /page-about -->
 
-  <!-- IMPORTANT DATES -->
-  <div class="section" id="dates">
-    <div class="section-header">
-      <h2>Important Dates</h2>
+  <!-- ═══ PAGE: SPEAKERS ═══ -->
+  <div class="page" id="page-speakers">
+
+    <div class="section" id="speakers">
+      <div class="section-header">
+        <h2>Confirmed Speakers</h2>
+      </div>
+      <div class="speakers-grid">
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
+                 onerror="this.parentNode.innerHTML='JN'">
+          </div>
+          <div class="speaker-name"><a href="https://jeknov.github.io/" target="_blank">Jekaterina Novikova</a></div>
+          <div class="speaker-affil">Vanguard Group</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="assets/img/yangyi-liu.jpg" alt="Yangyi Liu"
+                 onerror="this.parentNode.innerHTML='YL'">
+          </div>
+          <div class="speaker-name">Yangyi Liu</div>
+          <div class="speaker-affil">Vanguard Group</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
+                 referrerpolicy="no-referrer"
+                 onerror="this.parentNode.innerHTML='SR'">
+          </div>
+          <div class="speaker-name"><a href="https://sirisharambhatla.com/" target="_blank">Sirisha Rambhatla</a></div>
+          <div class="speaker-affil">University of Waterloo</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://mathias.lecuyer.me/assets/images/mathias-lecuyer.jpg" alt="Mathias Lécuyer"
+                 onerror="this.parentNode.innerHTML='ML'">
+          </div>
+          <div class="speaker-name"><a href="https://mathias.lecuyer.me/" target="_blank">Mathias Lécuyer</a></div>
+          <div class="speaker-affil">University of British Columbia</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://www.cs.sfu.ca/~linyi/res/avatar/linyili.jpg" alt="Linyi Li"
+                 onerror="this.parentNode.innerHTML='LL'">
+          </div>
+          <div class="speaker-name"><a href="https://www.cs.sfu.ca/~linyi/" target="_blank">Linyi Li</a></div>
+          <div class="speaker-affil">Simon Fraser University</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="assets/img/joanna-redden.jpg" alt="Joanna Redden"
+                 onerror="this.parentNode.innerHTML='JR'">
+          </div>
+          <div class="speaker-name"><a href="https://www.fims.uwo.ca/people/profiles/joanna_redden.html" target="_blank">Joanna Redden</a></div>
+          <div class="speaker-affil">Western University</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="https://photos-professeurs.uqam.ca/images/fiche_professeur/m2/Cs%252bwEyQAgtQ_.jpg" alt="Sébastien Gambs"
+                 referrerpolicy="no-referrer"
+                 onerror="this.parentNode.innerHTML='SG'">
+          </div>
+          <div class="speaker-name"><a href="https://professeurs.uqam.ca/professeur/gambs.sebastien/" target="_blank">Sébastien Gambs</a></div>
+          <div class="speaker-affil">Université du Québec à Montréal</div>
+        </div>
+
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <img src="assets/img/elliot-creager.jpg" alt="Elliot Creager"
+                 onerror="this.parentNode.innerHTML='EC'">
+          </div>
+          <div class="speaker-name"><a href="https://ecreager.github.io/" target="_blank">Elliot Creager</a></div>
+          <div class="speaker-affil">University of Waterloo</div>
+        </div>
+
+      </div>
     </div>
-    <table class="dates-table">
-      <tbody>
+
+  </div><!-- /page-speakers -->
+
+  <!-- ═══ PAGE: SCHEDULE ═══ -->
+  <div class="page" id="page-schedule">
+
+    <div class="section" id="schedule">
+      <div class="section-header">
+        <h2>Schedule</h2>
+      </div>
+      <p class="schedule-meta">May 25, 2026 · Vancouver, Canada · All times PDT (UTC−7)</p>
+      <table class="schedule-table">
+
+        <!-- MORNING -->
+        <tr class="sched-section-header"><td colspan="3">Morning Session</td></tr>
+
         <tr>
-          <td>April 30, 2026</td>
-          <td>Submission deadline &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+          <td class="sched-time">9:00–9:05</td>
+          <td class="sched-speaker">Opening Remarks<span class="sched-note">Yiwei Lu</span></td>
+          <td class="sched-talk"></td>
         </tr>
+
         <tr>
-          <td>April 30, 2026</td>
-          <td>Notification of decisions &nbsp;<span style="font-weight:400;color:var(--muted);font-size:.88em">(AoE)</span></td>
+          <td class="sched-time">9:05–9:55</td>
+          <td class="sched-speaker">Jekaterina Novikova &amp; Yangyi Liu<span class="sched-note">Vanguard Group</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-vanguard')">Data/Model Protection in Financial AI</button>
+            <span class="sched-note">40 min + 10 min Q&amp;A</span>
+          </td>
         </tr>
-        <tr class="highlight">
-          <td>May 25, 2026</td>
-          <td>Workshop day &nbsp;<span style="font-weight:400;font-size:.88em">— co-located with AI/CRV 2026</span></td>
+
+        <tr>
+          <td class="sched-time">9:55–10:20</td>
+          <td class="sched-speaker">Sirisha Rambhatla<span class="sched-note">University of Waterloo</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-sirisha')">Efficient and Safe LLM Adaptation: Advances in Training, Surprises in Safety</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
         </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- INVITED SPEAKERS -->
-  <div class="section" id="speakers">
-    <div class="section-header">
-      <h2>Confirmed Speakers</h2>
+        <tr class="sched-row-break">
+          <td class="sched-time">10:20–11:00</td>
+          <td class="sched-speaker">Coffee Break</td>
+          <td class="sched-talk"></td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">11:00–11:25</td>
+          <td class="sched-speaker">Sébastien Gambs<span class="sched-note">Université du Québec à Montréal</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-sebastien')">Understanding and Addressing Fairwashing in Machine Learning</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">11:25–11:50</td>
+          <td class="sched-speaker">Reza Samavi<span class="sched-note">Toronto Metropolitan University<br>Presented by Mohammadreza Maleki</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-reza')">Rethinking the Tightness–Efficiency Trade-off in Certified Robustness</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">11:50–12:20</td>
+          <td class="sched-speaker">Student Lightning Talks</td>
+          <td class="sched-talk">5 presentations × 5 min</td>
+        </tr>
+
+        <!-- LUNCH -->
+        <tr class="sched-row-break">
+          <td class="sched-time">12:20–14:00</td>
+          <td class="sched-speaker">Lunch Break</td>
+          <td class="sched-talk"></td>
+        </tr>
+
+        <!-- AFTERNOON -->
+        <tr class="sched-section-header"><td colspan="3">Afternoon Session</td></tr>
+
+        <tr>
+          <td class="sched-time">14:00–14:25</td>
+          <td class="sched-speaker">Joanna Redden<span class="sched-note">Western University · Joining online (17:00 EDT)</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-joanna')">AI Governance in Practice: Why Attention to Impact Matters</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">14:25–14:50</td>
+          <td class="sched-speaker">Elliot Creager<span class="sched-note">University of Waterloo</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-elliot')">The Role of Coordination and Collective Action in Trustworthy Machine Learning</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">14:50–15:15</td>
+          <td class="sched-speaker">Mathias Lécuyer<span class="sched-note">University of British Columbia</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-mathias')">Membership Inference for Privacy Audits and Evidence of Training without Model Control</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="sched-time">15:15–15:40</td>
+          <td class="sched-speaker">Linyi Li<span class="sched-note">Simon Fraser University</span></td>
+          <td class="sched-talk">
+            <button class="abstract-link" onclick="openModal('abs-linyi')">Towards Scientific Evaluation for Code LLMs</button>
+            <span class="sched-note">20 min + 5 min Q&amp;A</span>
+          </td>
+        </tr>
+
+      </table>
     </div>
-    <div class="speakers-grid">
 
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
-               onerror="this.parentNode.innerHTML='JN'">
-        </div>
-        <div class="speaker-name"><a href="https://jeknov.github.io/" target="_blank" style="color:inherit;">Jekaterina Novikova</a></div>
-        <div class="speaker-affil">Vanguard Group</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-jeknov')">Bio &amp; Talk</button>
+    <!-- ABSTRACT MODALS -->
+
+    <div class="modal-overlay" id="abs-vanguard" onclick="closeModalOnOverlay(event,'abs-vanguard')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-vanguard')">&times;</button>
+        <div class="modal-speaker-label">Jekaterina Novikova &amp; Yangyi Liu · Vanguard Group</div>
+        <div class="modal-talk-title">Data/Model Protection in Financial AI</div>
+        <p class="modal-text">Generative AI is rapidly entering high-stakes financial applications, where safety, compliance, and trust are critical. This talk explores why traditional notions of data and model protection fall short in deployed systems, where multi-turn interactions become the primary attack surface. We outline key risk categories—ranging from confidential data leakage to regulatory and market misuse—and show how these risks evolve across conversations. We introduce a multi-LLM red-teaming framework that models adversarial interactions as sequential processes, enabling systematic discovery of multi-turn vulnerabilities. Finally, we connect research advances to real-world deployment, highlighting gaps between academic safety methods and industry needs, and outlining pathways toward robust, secure generative AI in finance.</p>
       </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="assets/img/yangyi-liu.jpg" alt="Yangyi Liu"
-               onerror="this.parentNode.innerHTML='YL'">
-        </div>
-        <div class="speaker-name">Yangyi Liu</div>
-        <div class="speaker-affil">Vanguard Group</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-yangyi')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
-               referrerpolicy="no-referrer"
-               onerror="this.parentNode.innerHTML='SR'">
-        </div>
-        <div class="speaker-name"><a href="https://sirisharambhatla.com/" target="_blank" style="color:inherit;">Sirisha Rambhatla</a></div>
-        <div class="speaker-affil">University of Waterloo</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-sirisha')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://www.ee.torontomu.ca/~samavi/images/Reza_05_s.jpg" alt="Reza Samavi"
-               onerror="this.parentNode.innerHTML='RS'">
-        </div>
-        <div class="speaker-name"><a href="https://www.ee.torontomu.ca/~samavi/about.html" target="_blank" style="color:inherit;">Reza Samavi</a></div>
-        <div class="speaker-affil">Toronto Metropolitan University</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-reza')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://mathias.lecuyer.me/assets/images/mathias-lecuyer.jpg" alt="Mathias Lécuyer"
-               onerror="this.parentNode.innerHTML='ML'">
-        </div>
-        <div class="speaker-name"><a href="https://mathias.lecuyer.me/" target="_blank" style="color:inherit;">Mathias Lécuyer</a></div>
-        <div class="speaker-affil">University of British Columbia</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-mathias')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://www.cs.sfu.ca/~linyi/res/avatar/linyili.jpg" alt="Linyi Li"
-               onerror="this.parentNode.innerHTML='LL'">
-        </div>
-        <div class="speaker-name"><a href="https://www.cs.sfu.ca/~linyi/" target="_blank" style="color:inherit;">Linyi Li</a></div>
-        <div class="speaker-affil">Simon Fraser University</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-linyi')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="assets/img/joanna-redden.jpg" alt="Joanna Redden"
-               onerror="this.parentNode.innerHTML='JR'">
-        </div>
-        <div class="speaker-name"><a href="https://www.fims.uwo.ca/people/profiles/joanna_redden.html" target="_blank" style="color:inherit;">Joanna Redden</a></div>
-        <div class="speaker-affil">Western University</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-joanna')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="https://photos-professeurs.uqam.ca/images/fiche_professeur/m2/Cs%252bwEyQAgtQ_.jpg" alt="Sébastien Gambs"
-               referrerpolicy="no-referrer"
-               onerror="this.parentNode.innerHTML='SG'">
-        </div>
-        <div class="speaker-name"><a href="https://professeurs.uqam.ca/professeur/gambs.sebastien/" target="_blank" style="color:inherit;">Sébastien Gambs</a></div>
-        <div class="speaker-affil">Université du Québec à Montréal</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-sebastien')">Bio &amp; Talk</button>
-      </div>
-
-      <div class="speaker-card">
-        <div class="speaker-avatar">
-          <img src="assets/img/elliot-creager.jpg" alt="Elliot Creager"
-               onerror="this.parentNode.innerHTML='EC'">
-        </div>
-        <div class="speaker-name"><a href="https://ecreager.github.io/" target="_blank" style="color:inherit;">Elliot Creager</a></div>
-        <div class="speaker-affil">University of Waterloo</div>
-        <button class="speaker-bio-btn" onclick="openModal('modal-elliot')">Bio &amp; Talk</button>
-      </div>
-
     </div>
-  </div>
 
-  <!-- SPEAKER MODALS -->
-  <div class="modal-overlay" id="modal-jeknov" onclick="closeModalOnOverlay(event, 'modal-jeknov')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-jeknov')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://jeknov.github.io/assets/img/prof_pic-800.webp" alt="Jekaterina Novikova"
-               onerror="this.parentNode.innerHTML='JN'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://jeknov.github.io/" target="_blank">Jekaterina Novikova</a></div>
-          <div class="modal-affil">Principal AI Scientist, Vanguard Group</div>
-        </div>
+    <div class="modal-overlay" id="abs-sirisha" onclick="closeModalOnOverlay(event,'abs-sirisha')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-sirisha')">&times;</button>
+        <div class="modal-speaker-label">Sirisha Rambhatla · University of Waterloo</div>
+        <div class="modal-talk-title">Efficient and Safe LLM Adaptation: Advances in Training, Surprises in Safety</div>
+        <p class="modal-text">Adapting large language models (LLMs) to new tasks and deployment contexts is central to how AI systems are built and used, yet adaptation needs to be understood from two critical angles: efficiency and safety. In this talk, I examine both. First, I present SubTrack++, a training algorithm that leverages subspace tracking, a projection-aware optimizer, and rescaling normalization to simultaneously achieve state-of-the-art performance on memory, wall-time, and loss. Second, I show that adaptation is not just a resource problem but a safety one: even routine, well-intentioned fine-tuning has been shown to silently erode safety guardrails, yet no systematic characterization of this risk existed across models. To this end, I introduce TamperBench, the first benchmark of safety robustness under fine-tuning across 21 open-weight LLMs, revealing surprising disparities in how different models respond to tampering. As LLMs are adapted at ever-increasing scale, we need to treat efficiency and safety not as separate tracks, but as joint design criteria for the next generation of solutions.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Jekaterina Novikova is a Principal AI Scientist at Vanguard, specializing in computational models of natural language processing. Her work spans AI-powered natural language generation, machine learning for detecting cognitive impairment and mental health issues, and advancing human-robot interaction. She holds a PhD in Computer Science from the University of Bath and brings over a decade of experience in AI research across industry, academia, and non-profit organizations. She has contributed to major open-source AI projects including BLOOM LLM and BIG-Bench, and has been recognized as one of the Top 50 Most Extraordinary Women Advancing AI (2024) and Top 25 Women in AI in Canada (2022).</p>
-      <div class="modal-section-label">Talk: Data/Model Protection in Financial AI</div>
-      <p class="modal-text">Generative AI is rapidly entering high-stakes financial applications, where safety, compliance, and trust are critical. This talk explores why traditional notions of data and model protection fall short in deployed systems, where multi-turn interactions become the primary attack surface. We outline key risk categories—ranging from confidential data leakage to regulatory and market misuse—and show how these risks evolve across conversations. We introduce a multi-LLM red-teaming framework that models adversarial interactions as sequential processes, enabling systematic discovery of multi-turn vulnerabilities. Finally, we connect research advances to real-world deployment, highlighting gaps between academic safety methods and industry needs, and outlining pathways toward robust, secure generative AI in finance.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-yangyi" onclick="closeModalOnOverlay(event, 'modal-yangyi')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-yangyi')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="assets/img/yangyi-liu.jpg" alt="Yangyi Liu"
-               onerror="this.parentNode.innerHTML='YL'">
-        </div>
-        <div>
-          <div class="modal-title">Yangyi Liu</div>
-          <div class="modal-affil">Senior AI/ML Scientist, Vanguard Group</div>
-        </div>
+    <div class="modal-overlay" id="abs-sebastien" onclick="closeModalOnOverlay(event,'abs-sebastien')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-sebastien')">&times;</button>
+        <div class="modal-speaker-label">Sébastien Gambs · Université du Québec à Montréal</div>
+        <div class="modal-talk-title">Understanding and Addressing Fairwashing in Machine Learning</div>
+        <p class="modal-text">Fairwashing refers to the risk that an unfair black-box model can be explained by a fairer model through post-hoc explanation manipulation. In this talk, I will first discuss how fairwashing attacks can transfer across black-box models, meaning that other black-box models can perform fairwashing without explicitly using their predictions. This generalization and transferability of fairwashing attacks imply that their detection will be difficult in practice. Finally, I will nonetheless review some possible avenues of research on how to limit the potential for fairwashing.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Yangyi Liu is a Senior AI/ML Scientist at Vanguard, specializing in pattern recognition, knowledge extraction, and structured representation learning from domain-specific data. His research focuses on applying ML/AI models and techniques to convert unstructured data into structured representations for training, aligning, and improving AI models. His expertise encompasses trustworthy and explainable AI, structured knowledge representation, information theory, and LLMs. He completed his PhD at McMaster University. His work now focuses on bridging fundamental research and applied solutions, creating solutions that address practical challenges and advance transparency and reliability in AI.</p>
-      <div class="modal-section-label">Talk: Data/Model Protection in Financial AI</div>
-      <p class="modal-text">Generative AI is rapidly entering high-stakes financial applications, where safety, compliance, and trust are critical. This talk explores why traditional notions of data and model protection fall short in deployed systems, where multi-turn interactions become the primary attack surface. We outline key risk categories—ranging from confidential data leakage to regulatory and market misuse—and show how these risks evolve across conversations. We introduce a multi-LLM red-teaming framework that models adversarial interactions as sequential processes, enabling systematic discovery of multi-turn vulnerabilities. Finally, we connect research advances to real-world deployment, highlighting gaps between academic safety methods and industry needs, and outlining pathways toward robust, secure generative AI in finance.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-sirisha" onclick="closeModalOnOverlay(event, 'modal-sirisha')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-sirisha')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://sirisharambhatla.com/assets/img/Sirisha-1.jpg" alt="Sirisha Rambhatla"
-               referrerpolicy="no-referrer"
-               onerror="this.parentNode.innerHTML='SR'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://sirisharambhatla.com/" target="_blank">Sirisha Rambhatla</a></div>
-          <div class="modal-affil">Assistant Professor, University of Waterloo</div>
-        </div>
+    <div class="modal-overlay" id="abs-reza" onclick="closeModalOnOverlay(event,'abs-reza')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-reza')">&times;</button>
+        <div class="modal-speaker-label">Reza Samavi · Toronto Metropolitan University · <em>Presented by Mohammadreza Maleki</em></div>
+        <div class="modal-talk-title">Rethinking the Tightness–Efficiency Trade-off in Certified Robustness</div>
+        <p class="modal-text">Certified robustness of deep neural networks can be formulated as a nonconvex worst-case analysis problem, where one seeks the largest norm-bounded perturbation set within which the model's prediction is provably invariant. This problem is inherently intractable for ReLU networks, as it reduces to a nonconvex QCQP. Consequently, practical certification relies on convex relaxations that trade tightness for scalability. In this talk, we present recent advances in strengthening such relaxations. We first discuss a hierarchy of second-order cone programming (SOCP) relaxations that systematically tighten the linear programming (LP) bound at moderate computational overhead. We then examine the verification–training misalignment problem, wherein models trained with one relaxation are certified using another, often leading to suboptimal guarantees. We will discuss our recent work on a cascading verification framework where the approach improves the tightness–efficiency trade-off while partially aligning training and verification objectives through a multi-verifier perspective.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Sirisha Rambhatla, Ph.D., holds the Val O'Donovan Chair in Efficient, Safe, and Adaptive AI in the Faculty of Engineering and is an Assistant Professor in the Management Science and Engineering Department at the University of Waterloo, with cross-appointments in Systems Design Engineering and the David R. Cheriton School of Computer Science. Her research centers on the belief that machine learning systems deployed in high-stakes environments must be efficient enough to be practical, adaptive enough to be useful, and safe enough to be trusted. As Director of the Critical Machine Learning Lab, she develops models that meet all three demands, with applications spanning healthcare, manufacturing, and aviation. Her work has garnered over 50 publications and wide media coverage, and has been recognized with the 2025 Engineering Research Excellence Award and the 2025 Outstanding Performance Award from the University of Waterloo, and the 2021 Merit Award for Excellence in Postdoctoral Research from the University of Southern California. She earned her Ph.D. and M.S. in Electrical Engineering from the University of Minnesota, Twin Cities.</p>
-      <div class="modal-section-label">Talk: Efficient and Safe LLM Adaptation: Advances in Training, Surprises in Safety</div>
-      <p class="modal-text">Adapting large language models (LLMs) to new tasks and deployment contexts is central to how AI systems are built and used, yet adaptation needs to be understood from two critical angles: efficiency and safety. In this talk, I examine both. First, I present SubTrack++, a training algorithm that leverages subspace tracking, a projection-aware optimizer, and rescaling normalization to simultaneously achieve state-of-the-art performance on memory, wall-time, and loss. Second, I show that adaptation is not just a resource problem but a safety one: even routine, well-intentioned fine-tuning has been shown to silently erode safety guardrails, yet no systematic characterization of this risk existed across models. To this end, I introduce TamperBench, the first benchmark of safety robustness under fine-tuning across 21 open-weight LLMs, revealing surprising disparities in how different models respond to tampering. As LLMs are adapted at ever-increasing scale, we need to treat efficiency and safety not as separate tracks, but as joint design criteria for the next generation of solutions.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-reza" onclick="closeModalOnOverlay(event, 'modal-reza')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-reza')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://www.ee.torontomu.ca/~samavi/images/Reza_05_s.jpg" alt="Reza Samavi"
-               onerror="this.parentNode.innerHTML='RS'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://www.ee.torontomu.ca/~samavi/about.html" target="_blank">Reza Samavi</a></div>
-          <div class="modal-affil">Associate Professor, Toronto Metropolitan University</div>
-        </div>
+    <div class="modal-overlay" id="abs-joanna" onclick="closeModalOnOverlay(event,'abs-joanna')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-joanna')">&times;</button>
+        <div class="modal-speaker-label">Joanna Redden · Western University</div>
+        <div class="modal-talk-title">AI Governance in Practice: Why Attention to Impact Matters</div>
+        <p class="modal-text">Globally, political leaders are increasing calls for government agencies to make greater use of AI in an effort to improve efficiency and productivity. The Government of Canada has documented the use of more than 400 AI applications. Canadian Prime Minister Mark Carney has championed more AI deployment, mandating his cabinet and government departments to find new uses. The rapid pursuit of AI is occurring despite the widespread concerns of Canadians who repeatedly express a lack of trust in AI and call for stronger protections. Further, research demonstrates that AI applications in public service administration often do not work as intended and are pursued in ways that limit transparency and accountability while introducing error and causing harm.</p>
+        <p class="modal-text">This talk details research into the uses of AI and automated decision-making systems by government agencies in Canada. I discuss efforts to map government AI applications as well as to study the social and political implications of AI systems through case study investigations. I aim to show why AI oversight needs to be strengthened and informed by attending to real-world impacts and meaningful consultation about if, where and how these systems should be used.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Reza Samavi is an Associate Professor in the Department of Electrical, Computer, and Biomedical Engineering at Toronto Metropolitan University and a faculty affiliate with the Vector Institute for Artificial Intelligence. He received his PhD from the University of Toronto. His research interests include Data Security &amp; Privacy, Safety &amp; Security of Machine Learning models, and Trustworthy AI. He has received research funding from NSERC, SOSCIP, MITACS, HHS, and IDEaS, and has been recognized with the Privacy Technologies Research Award from IBM and the Privacy By Design Research Award from the Information and Privacy Commissioner of Ontario.</p>
-      <div class="modal-section-label">Talk: Rethinking the Tightness–Efficiency Trade-off in Certified Robustness</div>
-      <p class="modal-text">Certified robustness of deep neural networks can be formulated as a nonconvex worst-case analysis problem, where one seeks the largest norm-bounded perturbation set within which the model's prediction is provably invariant. This problem is inherently intractable for ReLU networks, as it reduces to a nonconvex QCQP. Consequently, practical certification relies on convex relaxations that trade tightness for scalability. In this talk, we present recent advances in strengthening such relaxations. We first discuss a hierarchy of second-order cone programming (SOCP) relaxations that systematically tighten the linear programming (LP) bound at moderate computational overhead. We then examine the verification–training misalignment problem, wherein models trained with one relaxation are certified using another, often leading to suboptimal guarantees. We will discuss our recent work on a cascading verification framework where the approach improves the tightness–efficiency trade-off while partially aligning training and verification objectives through a multi-verifier perspective.</p>
-      <p class="modal-text" style="font-style:italic; color:var(--muted); margin-top:.6rem;">This talk will be presented by Mohammadreza Maleki, PhD graduate from Prof. Samavi's group.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-mathias" onclick="closeModalOnOverlay(event, 'modal-mathias')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-mathias')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://mathias.lecuyer.me/assets/images/mathias-lecuyer.jpg" alt="Mathias Lécuyer"
-               onerror="this.parentNode.innerHTML='ML'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://mathias.lecuyer.me/" target="_blank">Mathias Lécuyer</a></div>
-          <div class="modal-affil">Assistant Professor, University of British Columbia</div>
-        </div>
+    <div class="modal-overlay" id="abs-elliot" onclick="closeModalOnOverlay(event,'abs-elliot')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-elliot')">&times;</button>
+        <div class="modal-speaker-label">Elliot Creager · University of Waterloo</div>
+        <div class="modal-talk-title">The Role of Coordination and Collective Action in Trustworthy Machine Learning</div>
+        <p class="modal-text">The integration of AI into daily life has generated considerable attention and excitement, while also raising concerns about automating algorithmic harms and re-entrenching existing social inequities. While the responsible deployment of trustworthy AI systems is a worthy goal, there are many possible ways to realize it, from policy and regulation to improved algorithm design and evaluation. In fact, since AI trains on social data, there is even a possibility for everyday users, citizens, or workers to directly steer its behavior through Algorithmic Collective Action, by deliberately modifying the data they share with a platform to drive its learning process in their favor. I will discuss a few recent and ongoing projects from my lab that explore this theme.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Mathias Lécuyer is an Assistant Professor at the University of British Columbia, where he is part of the ML, Systems, and Security &amp; Privacy groups, as well as CAIDA and TrustML. He is also Head of Research at Wiremind. Prior to joining UBC, he was a postdoctoral researcher at Microsoft Research New York and completed his PhD at Columbia University. His research focuses on trustworthy AI, with an emphasis on enforcing provable guarantees in models and their data ecosystems, spanning privacy, adversarial robustness, explainability, and causal machine learning. His foundational work on Randomized Smoothing — the only technique to provably ensure robustness that scales to large AI models — has garnered over a thousand citations.</p>
-      <div class="modal-section-label">Talk: Membership Inference for Privacy Audits and Evidence of Training without Model Control</div>
-      <p class="modal-text">In this talk I present a new data leakage measurement technique we developed, that does not require control of the audited model, or access to in-distribution non-member data. This is particularly important in the age of foundation models, often trained on all available data at a given time and only released through APIs. I will also connect this measurement technique to ongoing efforts in detecting data use in large AI models, a timely question at the intersection of AI and intellectual property.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-linyi" onclick="closeModalOnOverlay(event, 'modal-linyi')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-linyi')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://www.cs.sfu.ca/~linyi/res/avatar/linyili.jpg" alt="Linyi Li"
-               onerror="this.parentNode.innerHTML='LL'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://www.cs.sfu.ca/~linyi/" target="_blank">Linyi Li</a></div>
-          <div class="modal-affil">Assistant Professor, Simon Fraser University</div>
-        </div>
+    <div class="modal-overlay" id="abs-mathias" onclick="closeModalOnOverlay(event,'abs-mathias')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-mathias')">&times;</button>
+        <div class="modal-speaker-label">Mathias Lécuyer · University of British Columbia</div>
+        <div class="modal-talk-title">Membership Inference for Privacy Audits and Evidence of Training without Model Control</div>
+        <p class="modal-text">In this talk I present a new data leakage measurement technique we developed, that does not require control of the audited model, or access to in-distribution non-member data. This is particularly important in the age of foundation models, often trained on all available data at a given time and only released through APIs. I will also connect this measurement technique to ongoing efforts in detecting data use in large AI models, a timely question at the intersection of AI and intellectual property.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Linyi Li is an Assistant Professor in the School of Computing Science at Simon Fraser University, where he directs the TAI Lab. His research focuses on trustworthy deep learning, with an emphasis on certifiably trustworthy deep learning and trustworthy foundation models, spanning machine learning and computer security. He works on enabling certifiable and verifiable trustworthiness guarantees (such as robustness, fairness, and numerical reliability) for large-scale deep learning systems, and on scientifically evaluating foundation models. He has published over 30 papers at top venues including ICML, NeurIPS, ICLR, IEEE S&amp;P, and ACM CCS, and has received the Rising Stars in Data Science award, the AdvML Rising Star Award, and the Wing Kai Cheng Fellowship. He received his PhD in Computer Science from the University of Illinois Urbana-Champaign.</p>
-      <div class="modal-section-label">Talk: Towards Scientific Evaluation for Code LLMs</div>
-      <p class="modal-text">Large Language Models (LLMs) are fundamentally reshaping the software development landscape, necessitating rigorous new standards for evaluation. In this talk, I introduce three representative benchmarks that capture the progression of code intelligence: InfiBench (NeurIPS 2024), RV-Bench (AAAI 2026), and AppForge (ICLR 2026). I will detail how these frameworks target distinct capabilities: InfiBench utilizes expert-curated Q&amp;A to assess core software development proficiency; RV-Bench challenges mathematical reasoning and robustness through randomly injected variables in logic puzzles; and AppForge provides a complex, interactive environment for evaluating end-to-end Android application development. Developed between 2023 and 2025, these co-evolving benchmarks do not merely track progress but actively define it — balancing user-centric alignment with rigorous scientific principles. Finally, I will discuss the lessons learned through building these benchmarks, how these benchmarks have provided critical insights to guide the training of frontier models, and conclude by envisioning the future of benchmark research.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-joanna" onclick="closeModalOnOverlay(event, 'modal-joanna')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-joanna')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="assets/img/joanna-redden.jpg" alt="Joanna Redden"
-               onerror="this.parentNode.innerHTML='JR'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://www.fims.uwo.ca/people/profiles/joanna_redden.html" target="_blank">Joanna Redden</a></div>
-          <div class="modal-affil">Associate Professor, Faculty of Information &amp; Media Studies, Western University</div>
-        </div>
+    <div class="modal-overlay" id="abs-linyi" onclick="closeModalOnOverlay(event,'abs-linyi')">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('abs-linyi')">&times;</button>
+        <div class="modal-speaker-label">Linyi Li · Simon Fraser University</div>
+        <div class="modal-talk-title">Towards Scientific Evaluation for Code LLMs</div>
+        <p class="modal-text">Large Language Models (LLMs) are fundamentally reshaping the software development landscape, necessitating rigorous new standards for evaluation. In this talk, I introduce three representative benchmarks that capture the progression of code intelligence: InfiBench (NeurIPS 2024), RV-Bench (AAAI 2026), and AppForge (ICLR 2026). I will detail how these frameworks target distinct capabilities: InfiBench utilizes expert-curated Q&amp;A to assess core software development proficiency; RV-Bench challenges mathematical reasoning and robustness through randomly injected variables in logic puzzles; and AppForge provides a complex, interactive environment for evaluating end-to-end Android application development. Developed between 2023 and 2025, these co-evolving benchmarks do not merely track progress but actively define it — balancing user-centric alignment with rigorous scientific principles. Finally, I will discuss the lessons learned through building these benchmarks, how these benchmarks have provided critical insights to guide the training of frontier models, and conclude by envisioning the future of benchmark research.</p>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Joanna Redden is an Associate Professor at the Faculty of Information &amp; Media Studies (FIMS) at Western University and co-director of the Starling Centre and the UK-based Data Justice Lab. Her research focuses on datafication, politics, governance, and social justice. She is currently working on projects that map and analyze the social and political implications of increasing government uses of AI and automated data systems, learn from data harms and those working to redress them, and advance civic participation in datafied societies. She is co-author of <em>Understanding Media: Communication, Power and Social Change</em> (Penguin, 2024) and <em>Data Justice</em> (Sage, 2022), and author of <em>The Mediation of Poverty</em> (Lexington, 2014). Prior to joining Western, she was a Senior Lecturer at Cardiff University and an Assistant Professor at the University of Calgary. She holds a PhD from Goldsmiths University of London.</p>
-      <div class="modal-section-label">Talk: AI Governance in Practice: Why Attention to Impact Matters</div>
-      <p class="modal-text">Globally, political leaders are increasing calls for government agencies to make greater use of AI in an effort to improve efficiency and productivity. The Government of Canada has documented the use of more than 400 AI applications. Canadian Prime Minister Mark Carney has championed more AI deployment, mandating his cabinet and government departments to find new uses. The rapid pursuit of AI is occurring despite the widespread concerns of Canadians who repeatedly express a lack of trust in AI and call for stronger protections. Further, research demonstrates that AI applications in public service administration often do not work as intended and are pursued in ways that limit transparency and accountability while introducing error and causing harm.</p>
-      <p class="modal-text">This talk details research into the uses of AI and automated decision-making systems by government agencies in Canada. I discuss efforts to map government AI applications as well as to study the social and political implications of AI systems through case study investigations. I aim to show why AI oversight needs to be strengthened and informed by attending to real-world impacts and meaningful consultation about if, where and how these systems should be used.</p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-sebastien" onclick="closeModalOnOverlay(event, 'modal-sebastien')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-sebastien')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="https://photos-professeurs.uqam.ca/images/fiche_professeur/m2/Cs%252bwEyQAgtQ_.jpg" alt="Sébastien Gambs"
-               referrerpolicy="no-referrer"
-               onerror="this.parentNode.innerHTML='SG'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://professeurs.uqam.ca/professeur/gambs.sebastien/" target="_blank">Sébastien Gambs</a></div>
-          <div class="modal-affil">Professor &amp; Canada Research Chair, Université du Québec à Montréal</div>
-        </div>
+  </div><!-- /page-schedule -->
+
+  <!-- ═══ PAGE: ORGANIZERS ═══ -->
+  <div class="page" id="page-organizers">
+
+    <div class="section" id="organizers">
+      <div class="section-header">
+        <h2>Organizers</h2>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Sébastien Gambs has held the Canada Research Chair in Privacy and Ethical Analysis of Massive Data since December 2017 and has been a professor in the Department of Computer Science at the Université du Québec à Montréal since January 2016. His main research theme is privacy in the digital world. He is also interested in solving long-term scientific questions such as the existing tensions between massive data analysis and privacy, as well as ethical issues including fairness, transparency, and algorithmic accountability raised by personalized systems.</p>
-      <div class="modal-section-label">Talk: Understanding and Addressing Fairwashing in Machine Learning</div>
-      <p class="modal-text">Fairwashing refers to the risk that an unfair black-box model can be explained by a fairer model through post-hoc explanation manipulation. In this talk, I will first discuss how fairwashing attacks can transfer across black-box models, meaning that other black-box models can perform fairwashing without explicitly using their predictions. This generalization and transferability of fairwashing attacks imply that their detection will be difficult in practice. Finally, I will nonetheless review some possible avenues of research on how to limit the potential for fairwashing.</p>
+      <div class="org-grid">
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="https://yiweilu3.github.io/img/Yiwei_headshot.png" alt="Yiwei Lu"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>YL</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://yiweilu3.github.io/" target="_blank" style="color:inherit;">Yiwei Lu</a></div>
+            <div class="org-affil">University of Ottawa</div>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="https://yihan-wang.com/2025.jpeg" alt="Yihan Wang"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>YW</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://yihan-wang.com/" target="_blank" style="color:inherit;">Yihan Wang</a></div>
+            <div class="org-affil">University of Waterloo</div>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="https://www.uottawa.ca/faculty-engineering/sites/g/files/bhrskd396/files/2025-09/Fraser2025.jpeg" alt="Kathleen Fraser"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>KF</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://katiefraser.github.io/" target="_blank" style="color:inherit;">Kathleen Fraser</a></div>
+            <div class="org-affil">University of Ottawa</div>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="https://www.uottawa.ca/research-innovation/sites/g/files/bhrskd326/files/2023-10/millar_jason_new.jpg" alt="Jason Millar"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>JM</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://techlaw.uottawa.ca/people/millar-jason" target="_blank" style="color:inherit;">Jason Millar</a></div>
+            <div class="org-affil">University of Ottawa</div>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="assets/img/yongyi-mao.jpg" alt="Yongyi Mao"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>YM</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://www.uottawa.ca/faculty-engineering/school-electrical-engineering-computer-science/directory/yongyi-mao" target="_blank" style="color:inherit;">Yongyi Mao</a></div>
+            <div class="org-affil">University of Ottawa</div>
+          </div>
+        </div>
+
+        <div class="org-card">
+          <div class="org-photo-wrap">
+            <img src="https://cjshui.github.io/photos/image2.jpeg" alt="Changjian Shui"
+                 onerror="this.parentNode.innerHTML='<span class=org-initials>CS</span>'">
+          </div>
+          <div>
+            <div class="org-name"><a href="https://cjshui.github.io/" target="_blank" style="color:inherit;">Changjian Shui</a></div>
+            <div class="org-affil">University of Ottawa</div>
+          </div>
+        </div>
+
+      </div>
+      <p style="margin-top:1.4rem; font-size:.88rem; color:var(--muted);">
+        For enquiries, please contact the organizers via the
+        <a href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">official workshop page</a>.
+      </p>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="modal-elliot" onclick="closeModalOnOverlay(event, 'modal-elliot')">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('modal-elliot')">&times;</button>
-      <div class="modal-header">
-        <div class="modal-avatar">
-          <img src="assets/img/elliot-creager.jpg" alt="Elliot Creager"
-               onerror="this.parentNode.innerHTML='EC'">
-        </div>
-        <div>
-          <div class="modal-title"><a href="https://ecreager.github.io/" target="_blank">Elliot Creager</a></div>
-          <div class="modal-affil">Assistant Professor, University of Waterloo</div>
-        </div>
+  </div><!-- /page-organizers -->
+
+  <!-- ═══ PAGE: CALL FOR PAPERS ═══ -->
+  <div class="page" id="page-cfp">
+
+    <div class="section" id="cfp">
+      <div class="section-header">
+        <h2>Call for Papers</h2>
       </div>
-      <div class="modal-section-label">Bio</div>
-      <p class="modal-text">Elliot Creager is an Assistant Professor in the Department of Electrical and Computer Engineering at the University of Waterloo, where he directs the Socially Embedded Machine Intelligence (SEMI) lab. His research focuses on building reliable and equitable AI systems that promote user data autonomy. He is a Faculty Affiliate at the Vector Institute for Artificial Intelligence and the Schwartz Reisman Institute for Technology and Society.</p>
-      <div class="modal-section-label">Talk: The Role of Coordination and Collective Action in Trustworthy Machine Learning</div>
-      <p class="modal-text">The integration of AI into daily life has generated considerable attention and excitement, while also raising concerns about automating algorithmic harms and re-entrenching existing social inequities. While the responsible deployment of trustworthy AI systems is a worthy goal, there are many possible ways to realize it, from policy and regulation to improved algorithm design and evaluation. In fact, since AI trains on social data, there is even a possibility for everyday users, citizens, or workers to directly steer its behavior through Algorithmic Collective Action, by deliberately modifying the data they share with a platform to drive its learning process in their favor. I will discuss a few recent and ongoing projects from my lab that explore this theme.</p>
+
+      <p class="topics-intro">We invite submissions to the Data and Model Protection in Generative AI workshop at AI/CRV 2026. This workshop aims to bring together researchers, practitioners, and policymakers to examine the evolving threat landscape affecting GenAI systems and to discuss effective mitigation strategies.</p>
+
+      <p class="topics-intro" style="margin-top:.8rem;">Topics include, but are not limited to, the following:</p>
+
+      <ul class="topic-list">
+        <li>Data poisoning, backdoor attacks, and defenses in machine learning</li>
+        <li>Privacy risks and training data leakage in generative models</li>
+        <li>Dataset provenance, attribution, and governance</li>
+        <li>Model extraction, model stealing, and intellectual property protection</li>
+        <li>Model watermarking, fingerprinting, and ownership verification</li>
+        <li>Security risks in generative AI (e.g., prompt injection, jailbreak attacks)</li>
+        <li>Robust and secure machine learning pipelines</li>
+        <li>Governance, auditing, and responsible deployment of AI systems</li>
+      </ul>
+
+      <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Submission Guidelines</h3>
+      <p style="font-size:.95rem; color:#2a2a2a; margin-bottom:.8rem;">Submissions may report new research results, empirical analyses, system implementations, benchmarks, negative results, or visionary perspectives (e.g., positions). We also welcome submissions of <strong>recently published work</strong> — authors may submit papers published at or accepted to a venue in 2025 or 2026 for presentation at the workshop.</p>
+      <ul class="fmt-list">
+        <li><strong>Long track:</strong> up to 9 pages (excluding references)</li>
+        <li><strong>Short track:</strong> up to 4 pages (excluding references)</li>
+        <li><strong>Formatting:</strong> use the official <a href="https://www.caiac.ca/en/conferences/canadianai-2026/call-papers" target="_blank">Canadian AI 2026 style files</a> and submit a single PDF. New submissions should be anonymized; published papers may be submitted in their published form.</li>
+        <li><strong>Appendix:</strong> include any supplementary material in the same PDF — no page limit for the appendix.</li>
+      </ul>
+
+      <h3 style="font-family:var(--serif); font-size:1.05rem; font-weight:600; margin:1.8rem 0 .6rem;">Review Process</h3>
+      <div class="review-box">
+        Submissions will be reviewed by the workshop program chairs. Accepted papers will be presented as talks or posters. The workshop is <strong>non-archival</strong>, and authors are free to submit extended versions of their work to archival venues.
+      </div>
+
+      <p style="margin-top:1.4rem;">
+        <a class="btn btn-primary" href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">
+          Submit on OpenReview &rarr;
+        </a>
+      </p>
     </div>
-  </div>
 
-  <!-- SCHEDULE -->
-  <div class="section" id="schedule">
-    <div class="section-header">
-      <h2>Schedule</h2>
-    </div>
-    <p class="schedule-meta">May 25, 2026 · Vancouver, Canada · All times PDT (UTC−7)</p>
-    <table class="schedule-table">
-      <!-- MORNING -->
-      <tr class="sched-section-header"><td colspan="3">Morning Session</td></tr>
-
-      <tr>
-        <td class="sched-time">9:00–9:05</td>
-        <td class="sched-speaker">Opening Remarks<span class="sched-note">Yiwei Lu</span></td>
-        <td class="sched-talk"></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">9:05–9:55</td>
-        <td class="sched-speaker">Jekaterina Novikova &amp; Yangyi Liu<span class="sched-note">Vanguard Group</span></td>
-        <td class="sched-talk">Data/Model Protection in Financial AI<span class="sched-note">40 min + 10 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">9:55–10:20</td>
-        <td class="sched-speaker">Sirisha Rambhatla<span class="sched-note">University of Waterloo</span></td>
-        <td class="sched-talk">Efficient and Safe LLM Adaptation: Advances in Training, Surprises in Safety<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr class="sched-row-break">
-        <td class="sched-time">10:20–11:00</td>
-        <td class="sched-speaker">Coffee Break</td>
-        <td class="sched-talk"></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">11:00–11:25</td>
-        <td class="sched-speaker">Sébastien Gambs<span class="sched-note">Université du Québec à Montréal</span></td>
-        <td class="sched-talk">Understanding and Addressing Fairwashing in Machine Learning<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">11:25–11:50</td>
-        <td class="sched-speaker">Reza Samavi<span class="sched-note">Toronto Metropolitan University<br>Presented by Mohammadreza Maleki</span></td>
-        <td class="sched-talk">Rethinking the Tightness–Efficiency Trade-off in Certified Robustness<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">11:50–12:20</td>
-        <td class="sched-speaker">Student Lightning Talks</td>
-        <td class="sched-talk">5 presentations × 5 min</td>
-      </tr>
-
-      <!-- LUNCH -->
-      <tr class="sched-row-break">
-        <td class="sched-time">12:20–14:00</td>
-        <td class="sched-speaker">Lunch Break</td>
-        <td class="sched-talk"></td>
-      </tr>
-
-      <!-- AFTERNOON -->
-      <tr class="sched-section-header"><td colspan="3">Afternoon Session</td></tr>
-
-      <tr>
-        <td class="sched-time">14:00–14:25</td>
-        <td class="sched-speaker">Joanna Redden<span class="sched-note">Western University · Joining online (17:00 EDT)</span></td>
-        <td class="sched-talk">AI Governance in Practice: Why Attention to Impact Matters<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">14:25–14:50</td>
-        <td class="sched-speaker">Elliot Creager<span class="sched-note">University of Toronto</span></td>
-        <td class="sched-talk">The Role of Coordination and Collective Action in Trustworthy Machine Learning<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">14:50–15:15</td>
-        <td class="sched-speaker">Mathias Lécuyer<span class="sched-note">University of British Columbia</span></td>
-        <td class="sched-talk">Membership Inference for Privacy Audits and Evidence of Training without Model Control<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-      <tr>
-        <td class="sched-time">15:15–15:40</td>
-        <td class="sched-speaker">Linyi Li<span class="sched-note">Simon Fraser University</span></td>
-        <td class="sched-talk">Towards Scientific Evaluation for Code LLMs<span class="sched-note">20 min + 5 min Q&amp;A</span></td>
-      </tr>
-
-    </table>
-  </div>
-
-  <!-- ORGANIZERS -->
-  <div class="section" id="organizers">
-    <div class="section-header">
-      <h2>Organizers</h2>
-    </div>
-    <div class="org-grid">
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="https://yiweilu3.github.io/img/Yiwei_headshot.png" alt="Yiwei Lu"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>YL</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://yiweilu3.github.io/" target="_blank" style="color:inherit;">Yiwei Lu</a></div>
-          <div class="org-affil">University of Ottawa</div>
-        </div>
-      </div>
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="https://yihan-wang.com/2025.jpeg" alt="Yihan Wang"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>YW</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://yihan-wang.com/" target="_blank" style="color:inherit;">Yihan Wang</a></div>
-          <div class="org-affil">University of Waterloo</div>
-        </div>
-      </div>
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="https://www.uottawa.ca/faculty-engineering/sites/g/files/bhrskd396/files/2025-09/Fraser2025.jpeg" alt="Kathleen Fraser"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>KF</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://katiefraser.github.io/" target="_blank" style="color:inherit;">Kathleen Fraser</a></div>
-          <div class="org-affil">University of Ottawa</div>
-        </div>
-      </div>
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="https://www.uottawa.ca/research-innovation/sites/g/files/bhrskd326/files/2023-10/millar_jason_new.jpg" alt="Jason Millar"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>JM</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://techlaw.uottawa.ca/people/millar-jason" target="_blank" style="color:inherit;">Jason Millar</a></div>
-          <div class="org-affil">University of Ottawa</div>
-        </div>
-      </div>
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="assets/img/yongyi-mao.jpg" alt="Yongyi Mao"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>YM</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://www.uottawa.ca/faculty-engineering/school-electrical-engineering-computer-science/directory/yongyi-mao" target="_blank" style="color:inherit;">Yongyi Mao</a></div>
-          <div class="org-affil">University of Ottawa</div>
-        </div>
-      </div>
-
-      <div class="org-card">
-        <div class="org-photo-wrap">
-          <img src="https://cjshui.github.io/photos/image2.jpeg" alt="Changjian Shui"
-               onerror="this.parentNode.innerHTML='<span class=org-initials>CS</span>'">
-        </div>
-        <div>
-          <div class="org-name"><a href="https://cjshui.github.io/" target="_blank" style="color:inherit;">Changjian Shui</a></div>
-          <div class="org-affil">University of Ottawa</div>
-        </div>
-      </div>
-
-    </div>
-    <p style="margin-top:1.4rem; font-size:.88rem; color:var(--muted);">
-      For enquiries, please contact the organizers via the
-      <a href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">official workshop page</a>.
-    </p>
-  </div>
+  </div><!-- /page-cfp -->
 
 </div><!-- /page-wrap -->
 
@@ -914,12 +825,22 @@
   <div class="footer-links">
     <a href="https://www.ai-crv.ca/program/workshops/data-model-protection/" target="_blank">Official AI/CRV Page</a>
     <a href="https://openreview.net/group?id=AI-CRV.ca/2026/Workshop/DMP" target="_blank">OpenReview Submission</a>
-    <a href="#home">Back to Top</a>
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'})">Back to Top</a>
   </div>
   <p>DMP Workshop @ AI/CRV 2026 &nbsp;·&nbsp; Data and Model Protection in Generative AI</p>
 </footer>
 
 <script>
+  // ── PAGE NAVIGATION ──
+  function showPage(pageId, navEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
+    if (navEl) navEl.classList.add('nav-active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── MODALS ──
   function openModal(id) {
     document.getElementById(id).classList.add('open');
     document.body.style.overflow = 'hidden';
