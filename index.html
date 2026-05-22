@@ -318,7 +318,10 @@
     .footer-links a:hover { color: var(--indigo); }
 
     @media (max-width: 640px) {
-      .nav-links { display: none; }
+      .nav-inner { flex-direction: column; height: auto; padding: .5rem 1rem; gap: .4rem; align-items: flex-start; }
+      .nav-links { gap: 0; overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: .78rem; padding: .3rem .7rem .3rem 0; white-space: nowrap; }
       .hero-dates { flex-wrap: wrap; gap: .3rem 0; }
       .hd-item { white-space: nowrap; }
     }
