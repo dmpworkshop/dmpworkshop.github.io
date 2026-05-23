@@ -52,16 +52,17 @@
       color: rgba(255,255,255,.9);
     }
     .nav-links { display: flex; gap: 1.8rem; }
-    .nav-links a {
+    .nav-links button {
+      background: none; border: none; padding: 0;
       color: rgba(255,255,255,.65);
-      font-size: .83rem; font-weight: 500;
+      font-size: .83rem; font-weight: 500; font-family: var(--sans);
       transition: color .15s;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       cursor: pointer;
     }
-    .nav-links a:hover { color: #fff; text-decoration: none; }
-    .nav-links a.nav-active { color: #fff; }
+    .nav-links button:hover { color: #fff; }
+    .nav-links button.nav-active { color: #fff; }
 
     /* ── HERO ── */
     #home {
@@ -323,8 +324,8 @@
     @media (max-width: 640px) {
       .nav-inner { flex-direction: column; height: auto; padding: .4rem 1rem .5rem; gap: .35rem; align-items: flex-start; }
       .nav-links { flex-wrap: wrap; gap: .15rem .1rem; width: 100%; }
-      .nav-links a { font-size: .75rem; padding: .2rem .55rem; border-radius: 3px; }
-      .nav-links a.nav-active { background: rgba(255,255,255,.15); color: #fff; }
+      .nav-links button { font-size: .75rem; padding: .25rem .6rem; border-radius: 3px; }
+      .nav-links button.nav-active { background: rgba(255,255,255,.15); color: #fff; }
       .hero-dates { flex-wrap: wrap; gap: .3rem 0; }
       .hd-item { white-space: nowrap; }
     }
@@ -337,11 +338,11 @@
   <div class="nav-inner">
     <div class="nav-logo">DMP @ AI/CRV 2026</div>
     <div class="nav-links">
-      <a href="javascript:void(0)" onclick="showPage('page-about',this)" class="nav-active">About</a>
-      <a href="javascript:void(0)" onclick="showPage('page-speakers',this)">Speakers</a>
-      <a href="javascript:void(0)" onclick="showPage('page-schedule',this)">Schedule</a>
-      <a href="javascript:void(0)" onclick="showPage('page-organizers',this)">Organizers</a>
-      <a href="javascript:void(0)" onclick="showPage('page-cfp',this)">Call for Papers</a>
+      <button onclick="showPage('page-about',this)" class="nav-active">About</button>
+      <button onclick="showPage('page-speakers',this)">Speakers</button>
+      <button onclick="showPage('page-schedule',this)">Schedule</button>
+      <button onclick="showPage('page-organizers',this)">Organizers</button>
+      <button onclick="showPage('page-cfp',this)">Call for Papers</button>
     </div>
   </div>
 </nav>
@@ -890,7 +891,7 @@
   function showPage(pageId, navEl) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
+    document.querySelectorAll('.nav-links button').forEach(a => a.classList.remove('nav-active'));
     if (navEl) navEl.classList.add('nav-active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
