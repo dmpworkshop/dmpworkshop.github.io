@@ -629,7 +629,7 @@
           <td class="sched-time">15:15–15:40</td>
           <td class="sched-speaker">Linyi Li<span class="sched-note">Simon Fraser University</span></td>
           <td class="sched-talk">
-            <button class="abstract-link" onclick="openModal('abs-linyi')">Towards Scientific Evaluation for Code LLMs</button>
+            <button class="abstract-link" onclick="openModal('abs-linyi')">Jailbreaking Frontier LLMs with Off-Policy Requests</button>
             <span class="sched-note">20 min + 5 min Q&amp;A</span>
           </td>
         </tr>
@@ -737,8 +737,8 @@
       <div class="modal-box">
         <button class="modal-close" onclick="closeModal('abs-linyi')">&times;</button>
         <div class="modal-speaker-label">Linyi Li · Simon Fraser University</div>
-        <div class="modal-talk-title">Towards Scientific Evaluation for Code LLMs</div>
-        <p class="modal-text">Large Language Models (LLMs) are fundamentally reshaping the software development landscape, necessitating rigorous new standards for evaluation. In this talk, I introduce three representative benchmarks that capture the progression of code intelligence: InfiBench (NeurIPS 2024), RV-Bench (AAAI 2026), and AppForge (ICLR 2026). I will detail how these frameworks target distinct capabilities: InfiBench utilizes expert-curated Q&amp;A to assess core software development proficiency; RV-Bench challenges mathematical reasoning and robustness through randomly injected variables in logic puzzles; and AppForge provides a complex, interactive environment for evaluating end-to-end Android application development. Developed between 2023 and 2025, these co-evolving benchmarks do not merely track progress but actively define it — balancing user-centric alignment with rigorous scientific principles. Finally, I will discuss the lessons learned through building these benchmarks, how these benchmarks have provided critical insights to guide the training of frontier models, and conclude by envisioning the future of benchmark research.</p>
+        <div class="modal-talk-title">Jailbreaking Frontier LLMs with Off-Policy Requests</div>
+        <p class="modal-text">Safety alignment trains large language models to refuse harmful prompts — but what about inputs that fall entirely outside the training distribution? This talk presents two attacks that exploit precisely this blind spot. The first, the Benign Prompt (BP) Attack, transforms any harmful query into a semantically benign one while redirecting the model's response back to harmful content via a crafted opening. As a general paradigm wrapping any existing attack, BP achieves 87–93% Attack Success Rate (ASR) across six frontier LLMs on AdvBench, evading all prompt-side safety classifiers. The second, JARC (Jailbreaking with Alignment Research Context), is a systematic two-stage framework that builds a coherent jailbreaking-research narrative to rationalize the harmful request, generates a keyword-masked response template, then exploits session reset and agentic function calling to fill in harmful content. JARC achieves 80.7% average ASR on heavily aligned frontier models — GPT-5.1, Gemini 3.1 Pro, and Claude Sonnet 4.5 — at 10× fewer tokens than leading baselines, and can be fully automated as an agentic workflow at ~$3 per run. Together, these attacks reveal that agentic capabilities introduce new attack surfaces, and that future safety alignment must cover the full input-output distribution — not just direct harmful prompts. </p>
       </div>
     </div>
 
